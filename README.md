@@ -1,36 +1,98 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Buddy - CS Mastery PWA
 
-## Getting Started
+A free, phone-first Progressive Web Application for mastering computer science concepts.
 
-First, run the development server:
+## Current Implementation Status
+
+### ✅ Completed (Task 1.1 - 1.4)
+
+**Project Foundation:**
+- Next.js 14+ with TypeScript (strict mode)
+- Tailwind CSS configured
+- PWA manifest created
+- Testing infrastructure (Vitest, Playwright, fast-check)
+- Project structure established
+
+**Type Definitions:**
+- Complete TypeScript interfaces for all core types
+- Concept, Assessment, Progress, Schedule, Engagement, Session, Execution types
+- Full type safety across the codebase
+
+**Dexie Database:**
+- BuddyDatabase schema with 6 tables
+- Export/import functionality
+- Clear all data functionality
+- IndexedDB persistence layer
+
+**Core Business Logic:**
+- `KnowledgeGraphManager` - Curriculum management, prerequisite checking
+- `MasteryStateMachine` - State transitions, confidence calculation
+- `SpacedRepetitionScheduler` - FSRS and SM-2 algorithms
+- `AssessmentEngine` - Question grading, assessment management
+- `EngagementEngine` - XP, streaks, levels, weekly recaps
+- `SessionBuilder` - Session creation with interleaving
+
+**Seed Data:**
+- Curriculum with 14+ CS concepts across DSA and OS
+- Assessment bank with questions, explanations, coding problems
+- Real learning content for arrays and linked lists
+
+### 🚧 In Progress
+
+Currently building toward a minimal working MVP with:
+- Basic UI components
+- Knowledge map visualization
+- Micro-lesson cards
+- Quiz interface
+- Code execution environment
+
+### 📋 Next Steps
+
+1. Complete UI components (React components for lessons, assessments)
+2. Implement code execution workers (Pyodide for Python, sandboxed JS)
+3. Add LLM provider integration
+4. Build navigation and routing
+5. Implement offline caching
+6. Add comprehensive tests
+
+## Development
 
 ```bash
+# Install dependencies
+npm install
+
+# Run development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# Build for production
+npm run build
+
+# Run tests
+npm test
+
+# Type check
+npm run type-check
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Architecture
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **App Router**: Next.js 14+ with TypeScript
+- **State**: Zustand for global state
+- **Database**: Dexie (IndexedDB) for local-first storage
+- **Styling**: Tailwind CSS with dark mode
+- **Testing**: Vitest + fast-check + Playwright
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Key Features (Planned)
 
-## Learn More
+✅ Offline-first PWA
+✅ Privacy-first (on-device only)
+✅ Mobile-optimized UI
+✅ Spaced repetition (FSRS algorithm)
+- Multi-type assessments (quiz, explanation, applied, coding)
+- Code execution in browser (Python & JavaScript)
+- LLM-enhanced content (optional)
+- Progress tracking with XP and streaks
 
-To learn more about Next.js, take a look at the following resources:
+## License
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This is a learning project built to specification.

@@ -1,0 +1,1162 @@
+{
+  "version": "1.0",
+  "domains": [
+    {
+      "id": "dsa",
+      "name": "Data Structures & Algorithms",
+      "concepts": [
+        "dsa.complexity.big-o",
+        "dsa.array.basics",
+        "dsa.array.two-pointers",
+        "dsa.array.sliding-window",
+        "dsa.linkedlist.singly",
+        "dsa.linkedlist.doubly",
+        "dsa.stack.basics",
+        "dsa.queue.basics",
+        "dsa.tree.binary",
+        "dsa.tree.bst",
+        "dsa.heap.basics",
+        "dsa.hash.basics",
+        "dsa.graph.representation",
+        "dsa.graph.bfs-dfs",
+        "dsa.sorting.comparison"
+      ]
+    },
+    {
+      "id": "os",
+      "name": "Operating Systems",
+      "concepts": [
+        "os.process.basics",
+        "os.process.scheduling",
+        "os.thread.basics",
+        "os.sync.mutex",
+        "os.sync.deadlock",
+        "os.memory.virtual",
+        "os.memory.paging",
+        "os.memory.segmentation",
+        "os.memory.tlb",
+        "os.storage.filesystem",
+        "os.storage.inode",
+        "os.io.basics",
+        "os.io.dma",
+        "os.security.protection",
+        "os.boot.sequence"
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "id": "dsa.complexity.big-o",
+      "title": "Big-O Notation & Complexity Analysis",
+      "domain": "dsa",
+      "prerequisites": [],
+      "learningObjectives": [
+        { "description": "Define Big-O, Big-Ω, and Big-Θ notation", "bloomLevel": "remember" },
+        { "description": "Explain why constant factors are dropped in asymptotic analysis", "bloomLevel": "understand" },
+        { "description": "Analyze the time and space complexity of simple loops and recursive functions", "bloomLevel": "analyze" },
+        { "description": "Compare algorithms by their asymptotic growth rates", "bloomLevel": "evaluate" }
+      ],
+      "resources": [
+        {
+          "title": "Big-O Notation — Khan Academy (free)",
+          "url": "https://www.khanacademy.org/computing/computer-science/algorithms/asymptotic-notation/a/big-o-notation",
+          "type": "article",
+          "license": "CC BY-NC-SA 3.0",
+          "estimatedMinutes": 15
+        },
+        {
+          "title": "Introduction to Algorithms (CLRS) — MIT OpenCourseWare Lecture 1",
+          "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/",
+          "type": "video",
+          "license": "CC BY-NC-SA 4.0",
+          "estimatedMinutes": 50
+        },
+        {
+          "title": "CS50x — Week 0 Computational Thinking (CS50 OpenCourseWare)",
+          "url": "https://cs50.harvard.edu/x/",
+          "type": "video",
+          "license": "CC BY-NC-SA 4.0",
+          "estimatedMinutes": 30
+        }
+      ],
+      "microLessons": [
+        {
+          "id": "big-o-1",
+          "content": "## Why We Measure Complexity\n\nWhen two programs solve the same problem, which is 'better'? Faster hardware helps both equally, so we need a hardware-independent measure. **Asymptotic complexity** answers: *how does running time grow as input size n → ∞?*\n\n**Key insight**: For large n, an O(n) algorithm always beats O(n²) no matter how slow the hardware running O(n) is.",
+          "estimatedSeconds": 75
+        },
+        {
+          "id": "big-o-2",
+          "content": "## Big-O: Upper Bound\n\nf(n) = O(g(n)) means: there exist constants **c > 0** and **n₀** such that **f(n) ≤ c·g(n)** for all n ≥ n₀.\n\n**In plain English**: Big-O captures the *worst case*. It says 'f grows no faster than g, up to a constant.'\n\n**Example**: 5n² + 3n + 2 = O(n²) because for large n, the n² term dominates everything else.",
+          "estimatedSeconds": 80
+        },
+        {
+          "id": "big-o-3",
+          "content": "## The Complexity Ladder\n\n| Notation | Name | Example |\n|----------|------|---------|\n| O(1) | Constant | Array index lookup |\n| O(log n) | Logarithmic | Binary search |\n| O(n) | Linear | Linear scan |\n| O(n log n) | Linearithmic | Merge sort |\n| O(n²) | Quadratic | Bubble sort |\n| O(2ⁿ) | Exponential | Naive Fibonacci |\n\n**Rule of thumb**: An algorithm is considered efficient if it's O(n log n) or better.",
+          "estimatedSeconds": 85
+        },
+        {
+          "id": "big-o-4",
+          "content": "## Analysing Code: The Rules\n\n1. **Drop constants**: O(2n) → O(n)\n2. **Drop lower-order terms**: O(n² + n) → O(n²)\n3. **Loops multiply**: a nested loop over n × n → O(n²)\n4. **Consecutive blocks add**: O(n) + O(n²) → O(n²)\n5. **Recursion**: use the recurrence tree or Master Theorem\n\n```python\nfor i in range(n):        # O(n)\n    for j in range(n):    # × O(n) = O(n²)\n        print(i, j)\n```",
+          "estimatedSeconds": 90
+        },
+        {
+          "id": "big-o-5",
+          "content": "## Space Complexity\n\nSpace complexity counts **extra memory** your algorithm uses (not counting input).\n\n**Examples**:\n- Reverse a string in-place → O(1) extra space\n- Merge sort → O(n) extra space (merging step)\n- Recursive depth-first search → O(h) space where h = tree height\n\n**Common misconception**: An O(n) time algorithm does NOT have to use O(n) space — they're independent.",
+          "estimatedSeconds": 75
+        }
+      ],
+      "assessments": {
+        "quiz": ["big-o-q1", "big-o-q2", "big-o-q3"],
+        "explanation": ["big-o-e1"],
+        "applied": ["big-o-a1"],
+        "coding": ["big-o-c1"]
+      }
+    },
+    {
+      "id": "dsa.array.basics",
+      "title": "Arrays & Memory Layout",
+      "domain": "dsa",
+      "prerequisites": ["dsa.complexity.big-o"],
+      "learningObjectives": [
+        { "description": "Describe how arrays are stored in contiguous memory", "bloomLevel": "understand" },
+        { "description": "Calculate address of an element using index arithmetic", "bloomLevel": "apply" },
+        { "description": "Compare dynamic vs. static arrays for insertion/deletion", "bloomLevel": "analyze" }
+      ],
+      "resources": [
+        {
+          "title": "Arrays — CS50 Week 2 (Harvard OpenCourseWare)",
+          "url": "https://cs50.harvard.edu/x/weeks/2/",
+          "type": "video",
+          "license": "CC BY-NC-SA 4.0",
+          "estimatedMinutes": 45
+        },
+        {
+          "title": "Dynamic Arrays — USFCA Data Structures Visualizations",
+          "url": "https://www.cs.usfca.edu/~galles/visualization/Array.html",
+          "type": "interactive",
+          "license": "Free for educational use",
+          "estimatedMinutes": 10
+        }
+      ],
+      "microLessons": [
+        {
+          "id": "array-basics-1",
+          "content": "## Contiguous Memory\n\nAn array is a **fixed-size, contiguous block of memory** where every element is the same type and size. This means you can jump to any element in **O(1)** using:\n\n```\naddress(i) = base_address + i × element_size\n```\n\nFor a 4-byte integer array starting at address 1000:\n- arr[0] → 1000, arr[1] → 1004, arr[2] → 1008 …",
+          "estimatedSeconds": 75
+        },
+        {
+          "id": "array-basics-2",
+          "content": "## Static vs. Dynamic Arrays\n\n| Property | Static (C array) | Dynamic (Python list, Java ArrayList) |\n|----------|-----------------|---------------------------------------|\n| Size | Fixed at creation | Grows on demand |\n| Append | N/A | Amortised O(1) |\n| Access | O(1) | O(1) |\n| Insert middle | O(n) shift | O(n) shift |\n\n**Dynamic arrays** preallocate capacity (often 2×) and copy when full — that's why append is *amortised* O(1) not always O(1).",
+          "estimatedSeconds": 85
+        },
+        {
+          "id": "array-basics-3",
+          "content": "## Common Misconceptions\n\n❌ **'Array access is O(1) because of caching'** — It's O(1) because of the address formula, which is a single multiply-and-add. Cache effects are a constant-factor bonus, not the reason.\n\n❌ **'Python lists are arrays'** — They store *references* (pointers), not values. The array IS contiguous (of pointers), but the objects pointed to can be anywhere in memory.",
+          "estimatedSeconds": 70
+        }
+      ],
+      "assessments": {
+        "quiz": ["array-basics-q1", "array-basics-q2"],
+        "explanation": ["array-basics-e1"],
+        "applied": ["array-basics-a1"],
+        "coding": ["array-basics-c1"]
+      }
+    },
+    {
+      "id": "dsa.array.two-pointers",
+      "title": "Two-Pointer Technique",
+      "domain": "dsa",
+      "prerequisites": ["dsa.array.basics"],
+      "learningObjectives": [
+        { "description": "Explain the two-pointer pattern and when to apply it", "bloomLevel": "understand" },
+        { "description": "Apply two-pointer to solve pair-sum and palindrome problems", "bloomLevel": "apply" }
+      ],
+      "resources": [
+        {
+          "title": "Two Pointers — NeetCode Free Course",
+          "url": "https://neetcode.io/courses/dsa-for-beginners/1",
+          "type": "video",
+          "license": "Free",
+          "estimatedMinutes": 15
+        }
+      ],
+      "microLessons": [
+        {
+          "id": "two-pointers-1",
+          "content": "## The Two-Pointer Idea\n\nInstead of nested loops (O(n²)), use two indices that move toward each other (or in the same direction) to achieve **O(n)**.\n\n**Classic use case — sorted pair sum**:\n```python\nleft, right = 0, len(arr) - 1\nwhile left < right:\n    s = arr[left] + arr[right]\n    if s == target: return True\n    elif s < target: left += 1\n    else: right -= 1\n```\nThis works because the array is **sorted** — moving left/right provably narrows the search space.",
+          "estimatedSeconds": 85
+        },
+        {
+          "id": "two-pointers-2",
+          "content": "## Variants of Two Pointers\n\n1. **Opposite ends** (pair sum, palindrome check) — pointers start at 0 and n-1, move inward\n2. **Same direction / slow-fast** (remove duplicates, cycle detection) — fast pointer runs ahead of slow\n3. **Sliding window variant** — left and right both move right (covered in next concept)\n\n**Why it works**: At each step, at least one pointer moves, so the loop runs at most n times total → O(n).",
+          "estimatedSeconds": 80
+        }
+      ],
+      "assessments": {
+        "quiz": ["two-ptr-q1", "two-ptr-q2"],
+        "explanation": ["two-ptr-e1"],
+        "applied": ["two-ptr-a1"],
+        "coding": ["two-ptr-c1"]
+      }
+    },
+    {
+      "id": "dsa.array.sliding-window",
+      "title": "Sliding Window",
+      "domain": "dsa",
+      "prerequisites": ["dsa.array.two-pointers"],
+      "learningObjectives": [
+        { "description": "Explain the fixed and variable sliding window patterns", "bloomLevel": "understand" },
+        { "description": "Apply sliding window to subarray-sum and substring problems", "bloomLevel": "apply" }
+      ],
+      "resources": [
+        {
+          "title": "Sliding Window — NeetCode Free Course",
+          "url": "https://neetcode.io/courses/dsa-for-beginners/2",
+          "type": "video",
+          "license": "Free",
+          "estimatedMinutes": 15
+        }
+      ],
+      "microLessons": [
+        {
+          "id": "sliding-window-1",
+          "content": "## Fixed-Size Window\n\nMaintain a window of size k as it slides across the array. Reuse work from the previous step: subtract the element going out, add the element coming in — **O(1) per step** instead of O(k).\n\n```python\n# Max sum of k consecutive elements\nwindow_sum = sum(arr[:k])\nmax_sum = window_sum\nfor i in range(k, len(arr)):\n    window_sum += arr[i] - arr[i - k]\n    max_sum = max(max_sum, window_sum)\n```",
+          "estimatedSeconds": 80
+        },
+        {
+          "id": "sliding-window-2",
+          "content": "## Variable-Size Window\n\nThe window expands and contracts based on a condition. A right pointer always advances; a left pointer advances when the window violates the constraint.\n\n**Template**:\n```python\nleft = 0\nfor right in range(len(arr)):\n    # expand: include arr[right]\n    while window_is_invalid():\n        # shrink: exclude arr[left]\n        left += 1\n    # window [left..right] is now valid — update answer\n```\nTotal moves: right moves n times, left moves ≤ n times → **O(n)**.",
+          "estimatedSeconds": 90
+        }
+      ],
+      "assessments": {
+        "quiz": ["sw-q1", "sw-q2"],
+        "explanation": ["sw-e1"],
+        "applied": ["sw-a1"],
+        "coding": ["sw-c1"]
+      }
+    },
+    {
+      "id": "dsa.linkedlist.singly",
+      "title": "Singly Linked Lists",
+      "domain": "dsa",
+      "prerequisites": ["dsa.array.basics"],
+      "learningObjectives": [
+        { "description": "Implement node insertion, deletion, and traversal", "bloomLevel": "apply" },
+        { "description": "Compare linked list vs. array trade-offs", "bloomLevel": "analyze" }
+      ],
+      "resources": [
+        {
+          "title": "Linked Lists — CS50 Week 5 (Harvard OpenCourseWare)",
+          "url": "https://cs50.harvard.edu/x/weeks/5/",
+          "type": "video",
+          "license": "CC BY-NC-SA 4.0",
+          "estimatedMinutes": 40
+        }
+      ],
+      "microLessons": [
+        {
+          "id": "sll-1",
+          "content": "## Node Structure\n\nA singly linked list node holds two things: **data** and a **next pointer** to the following node (or null). The list is accessed only through the **head** pointer.\n\n```python\nclass Node:\n    def __init__(self, val):\n        self.val = val\n        self.next = None  # pointer to next node\n```\n\nUnlike arrays, nodes need NOT be contiguous in memory — this is both the strength (cheap insert/delete) and the weakness (no O(1) random access).",
+          "estimatedSeconds": 80
+        },
+        {
+          "id": "sll-2",
+          "content": "## Complexities Compared\n\n| Operation | Array | Singly Linked List |\n|-----------|-------|-------------------|\n| Access index i | O(1) | O(n) |\n| Insert at head | O(n) | **O(1)** |\n| Insert at tail | O(1) amortised | O(n) without tail ptr |\n| Delete at head | O(n) | **O(1)** |\n| Search | O(n) | O(n) |\n\n**Key rule**: Linked lists shine when you frequently insert/delete at the **head**, or when you don't know the size ahead of time.",
+          "estimatedSeconds": 85
+        }
+      ],
+      "assessments": {
+        "quiz": ["sll-q1", "sll-q2"],
+        "explanation": ["sll-e1"],
+        "applied": ["sll-a1"],
+        "coding": ["sll-c1"]
+      }
+    },
+    {
+      "id": "dsa.linkedlist.doubly",
+      "title": "Doubly Linked Lists",
+      "domain": "dsa",
+      "prerequisites": ["dsa.linkedlist.singly"],
+      "learningObjectives": [
+        { "description": "Explain the prev pointer and its trade-offs", "bloomLevel": "understand" },
+        { "description": "Implement O(1) deletion given a node reference", "bloomLevel": "apply" }
+      ],
+      "resources": [
+        {
+          "title": "Doubly Linked List — Visualgo (NUS, free)",
+          "url": "https://visualgo.net/en/list",
+          "type": "interactive",
+          "license": "Free for educational use",
+          "estimatedMinutes": 15
+        }
+      ],
+      "microLessons": [
+        {
+          "id": "dll-1",
+          "content": "## The prev Pointer\n\nA doubly linked list adds a **prev** pointer to each node, enabling traversal in both directions. The list usually maintains both a **head** and **tail** pointer.\n\n**Advantage**: Given a pointer to a node, deleting it is **O(1)** — just re-link its neighbors:\n```\nnode.prev.next = node.next\nnode.next.prev = node.prev\n```\n\n**Cost**: 2× pointer storage per node vs. singly linked.",
+          "estimatedSeconds": 75
+        }
+      ],
+      "assessments": {
+        "quiz": ["dll-q1"],
+        "explanation": ["dll-e1"],
+        "applied": ["dll-a1"],
+        "coding": ["dll-c1"]
+      }
+    },
+    {
+      "id": "dsa.stack.basics",
+      "title": "Stacks (LIFO)",
+      "domain": "dsa",
+      "prerequisites": ["dsa.array.basics"],
+      "learningObjectives": [
+        { "description": "Describe LIFO semantics and stack operations", "bloomLevel": "remember" },
+        { "description": "Apply a stack to bracket matching and function call simulation", "bloomLevel": "apply" }
+      ],
+      "resources": [
+        {
+          "title": "Stacks — Visualgo (NUS, free)",
+          "url": "https://visualgo.net/en/list",
+          "type": "interactive",
+          "license": "Free for educational use",
+          "estimatedMinutes": 10
+        }
+      ],
+      "microLessons": [
+        {
+          "id": "stack-1",
+          "content": "## Stack: Last In, First Out\n\nA stack supports three operations — all **O(1)**:\n- **push(x)** — add x to the top\n- **pop()** — remove and return the top element\n- **peek()** — return the top without removing\n\n**Real-world use**: The function call stack in every program. When f() calls g(), g's frame is pushed; when g() returns, it's popped. That's why 'stack overflow' is a deep recursion error.",
+          "estimatedSeconds": 75
+        },
+        {
+          "id": "stack-2",
+          "content": "## Bracket Matching with a Stack\n\n```python\ndef is_valid(s: str) -> bool:\n    stack = []\n    pairs = {')': '(', '}': '{', ']': '['}\n    for c in s:\n        if c in '({[': stack.append(c)\n        elif c in ')}]':\n            if not stack or stack[-1] != pairs[c]:\n                return False\n            stack.pop()\n    return not stack\n```\n\nWhy a stack? Because the most recently opened bracket must be the next one closed — that's exactly LIFO.",
+          "estimatedSeconds": 85
+        }
+      ],
+      "assessments": {
+        "quiz": ["stack-q1", "stack-q2"],
+        "explanation": ["stack-e1"],
+        "applied": ["stack-a1"],
+        "coding": ["stack-c1"]
+      }
+    },
+    {
+      "id": "dsa.queue.basics",
+      "title": "Queues & Deques (FIFO)",
+      "domain": "dsa",
+      "prerequisites": ["dsa.linkedlist.singly"],
+      "learningObjectives": [
+        { "description": "Describe FIFO semantics and queue/deque operations", "bloomLevel": "remember" },
+        { "description": "Implement a queue using two stacks", "bloomLevel": "apply" }
+      ],
+      "resources": [
+        {
+          "title": "Queues — Visualgo (NUS, free)",
+          "url": "https://visualgo.net/en/list",
+          "type": "interactive",
+          "license": "Free for educational use",
+          "estimatedMinutes": 10
+        }
+      ],
+      "microLessons": [
+        {
+          "id": "queue-1",
+          "content": "## Queue: First In, First Out\n\nA queue supports:\n- **enqueue(x)** — add to the back — O(1)\n- **dequeue()** — remove from the front — O(1)\n- **peek()** — see the front — O(1)\n\n**Key real use**: BFS traversal uses a queue. The OS scheduler's ready queue is a queue. Network packets buffer in queues.\n\n**Deque** (double-ended queue) = queue + stack: add/remove from *both* ends in O(1). Python's `collections.deque` is the go-to.",
+          "estimatedSeconds": 80
+        }
+      ],
+      "assessments": {
+        "quiz": ["queue-q1"],
+        "explanation": ["queue-e1"],
+        "applied": ["queue-a1"],
+        "coding": ["queue-c1"]
+      }
+    },
+    {
+      "id": "dsa.tree.binary",
+      "title": "Binary Trees & Traversals",
+      "domain": "dsa",
+      "prerequisites": ["dsa.queue.basics", "dsa.stack.basics"],
+      "learningObjectives": [
+        { "description": "Define binary tree, height, and balance", "bloomLevel": "remember" },
+        { "description": "Implement preorder, inorder, postorder, and BFS traversals", "bloomLevel": "apply" },
+        { "description": "Analyze the time complexity of tree traversals", "bloomLevel": "analyze" }
+      ],
+      "resources": [
+        {
+          "title": "Trees — MIT 6.006 Spring 2020 Lecture 6",
+          "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/",
+          "type": "video",
+          "license": "CC BY-NC-SA 4.0",
+          "estimatedMinutes": 50
+        }
+      ],
+      "microLessons": [
+        {
+          "id": "binary-tree-1",
+          "content": "## Binary Tree Structure\n\nA binary tree node has: **value**, **left** child, **right** child. Any node can have 0, 1, or 2 children.\n\n**Key terms**:\n- **Root**: top node (no parent)\n- **Leaf**: node with no children\n- **Height**: longest path from root to a leaf\n- **Perfect tree**: every level is completely filled\n- **Complete tree**: all levels full except possibly the last (filled left to right)",
+          "estimatedSeconds": 75
+        },
+        {
+          "id": "binary-tree-2",
+          "content": "## DFS Traversals (Use a Stack / Recursion)\n\n- **Preorder**: root → left → right (good for copying/serialising a tree)\n- **Inorder**: left → root → right (gives *sorted* output for a BST)\n- **Postorder**: left → right → root (good for deleting a tree)\n\n```python\ndef inorder(node):\n    if not node: return\n    inorder(node.left)\n    print(node.val)   # process root between subtrees\n    inorder(node.right)\n```\nTime: O(n) — every node visited exactly once. Space: O(h) call stack.",
+          "estimatedSeconds": 90
+        },
+        {
+          "id": "binary-tree-3",
+          "content": "## BFS Traversal (Level-Order — Use a Queue)\n\n```python\nfrom collections import deque\ndef bfs(root):\n    if not root: return\n    q = deque([root])\n    while q:\n        node = q.popleft()\n        print(node.val)\n        if node.left: q.append(node.left)\n        if node.right: q.append(node.right)\n```\n\nBFS visits nodes level by level. Useful for **shortest-path problems** on trees and for finding the **minimum depth**.",
+          "estimatedSeconds": 85
+        }
+      ],
+      "assessments": {
+        "quiz": ["tree-q1", "tree-q2", "tree-q3"],
+        "explanation": ["tree-e1"],
+        "applied": ["tree-a1"],
+        "coding": ["tree-c1"]
+      }
+    },
+    {
+      "id": "dsa.tree.bst",
+      "title": "Binary Search Trees",
+      "domain": "dsa",
+      "prerequisites": ["dsa.tree.binary"],
+      "learningObjectives": [
+        { "description": "State the BST property and why inorder traversal gives sorted output", "bloomLevel": "understand" },
+        { "description": "Implement search, insert, and delete in a BST", "bloomLevel": "apply" },
+        { "description": "Explain degeneration and why balanced BSTs (AVL/Red-Black) exist", "bloomLevel": "analyze" }
+      ],
+      "resources": [
+        {
+          "title": "Binary Search Trees — Visualgo (NUS, free)",
+          "url": "https://visualgo.net/en/bst",
+          "type": "interactive",
+          "license": "Free for educational use",
+          "estimatedMinutes": 20
+        }
+      ],
+      "microLessons": [
+        {
+          "id": "bst-1",
+          "content": "## The BST Property\n\nFor every node N:\n- All values in the **left subtree** < N.val\n- All values in the **right subtree** > N.val\n\nThis makes **search O(h)** — follow the BST property to go left or right at each step, discarding half the remaining candidates.\n\n**Average case**: h = O(log n) for random insertion order.\n**Worst case**: h = O(n) if you insert sorted data → degenerates to a linked list.",
+          "estimatedSeconds": 80
+        }
+      ],
+      "assessments": {
+        "quiz": ["bst-q1", "bst-q2"],
+        "explanation": ["bst-e1"],
+        "applied": ["bst-a1"],
+        "coding": ["bst-c1"]
+      }
+    },
+    {
+      "id": "dsa.heap.basics",
+      "title": "Heaps & Priority Queues",
+      "domain": "dsa",
+      "prerequisites": ["dsa.tree.binary"],
+      "learningObjectives": [
+        { "description": "Explain the heap property and array representation of heaps", "bloomLevel": "understand" },
+        { "description": "Trace heapify-up and heapify-down operations", "bloomLevel": "apply" },
+        { "description": "Justify why heap operations are O(log n)", "bloomLevel": "analyze" }
+      ],
+      "resources": [
+        {
+          "title": "Heaps — MIT 6.006 Spring 2020 (CLRS Chapter 6 companion)",
+          "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/",
+          "type": "video",
+          "license": "CC BY-NC-SA 4.0",
+          "estimatedMinutes": 50
+        }
+      ],
+      "microLessons": [
+        {
+          "id": "heap-1",
+          "content": "## Heap Property\n\nA **max-heap**: every parent's value ≥ its children's values. A **min-heap** is the reverse.\n\n**Smart array trick**: Store the heap in an array. For a node at index i:\n- Left child → 2i + 1\n- Right child → 2i + 2\n- Parent → (i - 1) / 2\n\nThis eliminates pointer overhead completely! The heap is a **complete binary tree** stored compactly.",
+          "estimatedSeconds": 85
+        },
+        {
+          "id": "heap-2",
+          "content": "## Insert & Extract-Min/Max\n\n**Insert**: Append to end, then **bubble up** (swap with parent while heap property violated) → O(log n).\n\n**Extract-min/max**: Swap root with last element, remove last, then **bubble down** (swap with smaller/larger child) → O(log n).\n\n**Peek**: Just read arr[0] → O(1).\n\n**Build heap** from n unsorted elements: O(n) (not O(n log n) — this surprises people!).",
+          "estimatedSeconds": 90
+        }
+      ],
+      "assessments": {
+        "quiz": ["heap-q1", "heap-q2"],
+        "explanation": ["heap-e1"],
+        "applied": ["heap-a1"],
+        "coding": ["heap-c1"]
+      }
+    },
+    {
+      "id": "dsa.hash.basics",
+      "title": "Hash Tables & Collision Handling",
+      "domain": "dsa",
+      "prerequisites": ["dsa.array.basics"],
+      "learningObjectives": [
+        { "description": "Explain how a hash function maps keys to buckets", "bloomLevel": "understand" },
+        { "description": "Compare chaining and open addressing for collision resolution", "bloomLevel": "analyze" },
+        { "description": "Justify why average-case operations are O(1)", "bloomLevel": "evaluate" }
+      ],
+      "resources": [
+        {
+          "title": "Hashing — MIT 6.006 Spring 2020 Lecture 4",
+          "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/",
+          "type": "video",
+          "license": "CC BY-NC-SA 4.0",
+          "estimatedMinutes": 50
+        }
+      ],
+      "microLessons": [
+        {
+          "id": "hash-1",
+          "content": "## Hash Tables: O(1) on Average\n\nA hash table maps **keys → values** using a **hash function** h(key) → bucket index. Ideally h distributes keys uniformly across m buckets.\n\n**Why O(1) average?** With a good hash function and load factor α = n/m kept small (< 0.75), each bucket has ~1 element on average. So lookup = compute h(key) + 1 comparison.",
+          "estimatedSeconds": 80
+        },
+        {
+          "id": "hash-2",
+          "content": "## Collision Resolution\n\n**Chaining**: Each bucket is a linked list. Collisions just extend the list. Simple, handles high load factors.\n\n**Open addressing**: All data in the array. On collision, probe to the next slot (linear, quadratic, or double hashing). Better cache performance, but load factor must stay < 1.\n\n**Common misconception**: Hash tables are always O(1) — FALSE. Worst case with many collisions is O(n). In practice, good hash functions make this astronomically rare.",
+          "estimatedSeconds": 85
+        }
+      ],
+      "assessments": {
+        "quiz": ["hash-q1", "hash-q2"],
+        "explanation": ["hash-e1"],
+        "applied": ["hash-a1"],
+        "coding": ["hash-c1"]
+      }
+    },
+    {
+      "id": "dsa.graph.representation",
+      "title": "Graph Representation",
+      "domain": "dsa",
+      "prerequisites": ["dsa.hash.basics", "dsa.linkedlist.singly"],
+      "learningObjectives": [
+        { "description": "Represent a graph as adjacency list and adjacency matrix", "bloomLevel": "apply" },
+        { "description": "Compare space and time trade-offs of each representation", "bloomLevel": "analyze" }
+      ],
+      "resources": [
+        {
+          "title": "Graphs — MIT 6.006 Spring 2020 Lecture 9",
+          "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/",
+          "type": "video",
+          "license": "CC BY-NC-SA 4.0",
+          "estimatedMinutes": 50
+        }
+      ],
+      "microLessons": [
+        {
+          "id": "graph-rep-1",
+          "content": "## Graphs: Vertices and Edges\n\nA graph G = (V, E) is a set of **vertices** (nodes) connected by **edges**.\n\n- **Undirected**: edges have no direction (friendship)\n- **Directed (digraph)**: edges have direction (Twitter follow)\n- **Weighted**: edges have a cost (road distance)\n\n**Density**: sparse graphs (E ≪ V²) → use adjacency list. Dense graphs (E ≈ V²) → adjacency matrix may be worth it.",
+          "estimatedSeconds": 75
+        },
+        {
+          "id": "graph-rep-2",
+          "content": "## Adjacency List vs. Matrix\n\n| | Adjacency List | Adjacency Matrix |\n|---|---|---|\n| Space | O(V + E) | O(V²) |\n| Edge lookup | O(degree) | O(1) |\n| Iterate neighbors | O(degree) | O(V) |\n\n**Default choice**: adjacency list. Almost all real-world graphs are sparse.\n\n```python\ngraph = {0: [1, 2], 1: [2], 2: [0, 3], 3: []}  # adjacency list\n```",
+          "estimatedSeconds": 80
+        }
+      ],
+      "assessments": {
+        "quiz": ["graph-rep-q1", "graph-rep-q2"],
+        "explanation": ["graph-rep-e1"],
+        "applied": ["graph-rep-a1"],
+        "coding": ["graph-rep-c1"]
+      }
+    },
+    {
+      "id": "dsa.graph.bfs-dfs",
+      "title": "Graph BFS & DFS",
+      "domain": "dsa",
+      "prerequisites": ["dsa.graph.representation"],
+      "learningObjectives": [
+        { "description": "Implement BFS and DFS on a graph iteratively and recursively", "bloomLevel": "apply" },
+        { "description": "Identify which traversal to use for shortest-path vs. connectivity problems", "bloomLevel": "analyze" }
+      ],
+      "resources": [
+        {
+          "title": "Graph Search — MIT 6.006 Spring 2020 Lecture 9",
+          "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/",
+          "type": "video",
+          "license": "CC BY-NC-SA 4.0",
+          "estimatedMinutes": 50
+        }
+      ],
+      "microLessons": [
+        {
+          "id": "bfs-dfs-1",
+          "content": "## BFS: Shortest Path on Unweighted Graphs\n\nBFS explores layer by layer (all distance-1 nodes, then distance-2, ...). It guarantees the **shortest path** on unweighted graphs.\n\n```python\nfrom collections import deque\ndef bfs(graph, start):\n    visited = {start}\n    queue = deque([start])\n    while queue:\n        v = queue.popleft()\n        for neighbor in graph[v]:\n            if neighbor not in visited:\n                visited.add(neighbor)\n                queue.append(neighbor)\n```\nTime: O(V + E). Space: O(V) for the visited set.",
+          "estimatedSeconds": 90
+        },
+        {
+          "id": "bfs-dfs-2",
+          "content": "## DFS: Connectivity, Cycles, Topological Sort\n\nDFS dives as deep as possible before backtracking. Natural for **cycle detection**, **topological sort**, **connected components**.\n\n```python\ndef dfs(graph, node, visited=None):\n    if visited is None: visited = set()\n    visited.add(node)\n    for neighbor in graph[node]:\n        if neighbor not in visited:\n            dfs(graph, neighbor, visited)\n```\n\n**Common misconception**: DFS finds shortest paths — it does NOT. Only BFS guarantees shortest on unweighted graphs.",
+          "estimatedSeconds": 85
+        }
+      ],
+      "assessments": {
+        "quiz": ["bfs-dfs-q1", "bfs-dfs-q2"],
+        "explanation": ["bfs-dfs-e1"],
+        "applied": ["bfs-dfs-a1"],
+        "coding": ["bfs-dfs-c1"]
+      }
+    },
+    {
+      "id": "dsa.sorting.comparison",
+      "title": "Comparison-Based Sorting",
+      "domain": "dsa",
+      "prerequisites": ["dsa.complexity.big-o", "dsa.tree.binary"],
+      "learningObjectives": [
+        { "description": "Implement merge sort and quicksort", "bloomLevel": "apply" },
+        { "description": "Explain the Ω(n log n) lower bound for comparison sorting", "bloomLevel": "understand" },
+        { "description": "Analyze average and worst-case performance of quicksort", "bloomLevel": "analyze" }
+      ],
+      "resources": [
+        {
+          "title": "Sorting — MIT 6.006 Spring 2020 Lectures 3-5",
+          "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/",
+          "type": "video",
+          "license": "CC BY-NC-SA 4.0",
+          "estimatedMinutes": 100
+        }
+      ],
+      "microLessons": [
+        {
+          "id": "sorting-1",
+          "content": "## The Ω(n log n) Lower Bound\n\nAny comparison-based sort must make at least **n log n** comparisons in the worst case. Proof: n! possible orderings of n elements. Each comparison rules out half the orderings. Binary tree of comparisons has ≥ n! leaves → height ≥ log₂(n!) ≈ n log n (Stirling).\n\n**Meaning**: Merge sort and heap sort are *optimal* comparison sorts. You can only do better if you exploit non-comparison information (like counting sort).",
+          "estimatedSeconds": 85
+        },
+        {
+          "id": "sorting-2",
+          "content": "## Merge Sort: Stable, O(n log n) Always\n\nDivide array in half, recursively sort each half, merge the two sorted halves.\n\n**Recurrence**: T(n) = 2T(n/2) + O(n) → **O(n log n)** by Master Theorem.\n**Space**: O(n) — merge step needs temp array.\n**Stable**: equal elements keep their original order.\n\nPreferred for linked lists (no random access needed for merge).",
+          "estimatedSeconds": 80
+        },
+        {
+          "id": "sorting-3",
+          "content": "## Quicksort: Fast in Practice, O(n²) Worst Case\n\nPick a pivot, partition array so everything < pivot is left, everything > is right, recurse.\n\n**Average**: O(n log n). **Worst case** (sorted input, bad pivot choice): O(n²).\n**Fix**: random pivot selection → expected O(n log n) with high probability.\n**Space**: O(log n) call stack on average. **Not stable** by default.\n\nIn practice, quicksort with random pivot is often faster than merge sort due to cache locality.",
+          "estimatedSeconds": 90
+        }
+      ],
+      "assessments": {
+        "quiz": ["sort-q1", "sort-q2", "sort-q3"],
+        "explanation": ["sort-e1"],
+        "applied": ["sort-a1"],
+        "coding": ["sort-c1"]
+      }
+    },
+    {
+      "id": "os.process.basics",
+      "title": "Processes & PCB",
+      "domain": "os",
+      "prerequisites": [],
+      "learningObjectives": [
+        { "description": "Define a process and distinguish it from a program", "bloomLevel": "understand" },
+        { "description": "List the fields of a Process Control Block", "bloomLevel": "remember" },
+        { "description": "Trace process state transitions", "bloomLevel": "apply" }
+      ],
+      "resources": [
+        {
+          "title": "OSTEP Chapter 4: The Process (free online textbook)",
+          "url": "https://pages.cs.wisc.edu/~remzi/OSTEP/cpu-intro.pdf",
+          "type": "article",
+          "license": "CC BY-NC-ND 3.0",
+          "estimatedMinutes": 30
+        }
+      ],
+      "microLessons": [
+        {
+          "id": "process-1",
+          "content": "## Program vs. Process\n\nA **program** is a passive set of instructions on disk. A **process** is a program **in execution** — the OS brings it to life by loading it into memory, giving it a stack, a heap, and a PID.\n\nOne program can spawn many processes (e.g., multiple Chrome windows). Many processes can run the same program simultaneously.",
+          "estimatedSeconds": 70
+        },
+        {
+          "id": "process-2",
+          "content": "## Process Control Block (PCB)\n\nThe OS tracks every process via a **PCB** (also called task_struct in Linux). Key fields:\n- **PID** — unique identifier\n- **Program counter (PC)** — next instruction address\n- **CPU registers** — saved context during context switch\n- **Memory maps** — what memory this process owns\n- **Open file descriptors** — which files are open\n- **Process state** — running, ready, blocked\n- **Priority / scheduling info**\n\nWhen the OS switches from one process to another (context switch), it saves the current PCB and loads the next one.",
+          "estimatedSeconds": 90
+        },
+        {
+          "id": "process-3",
+          "content": "## Process States\n\n```\nNew → Ready → Running → Terminated\n               ↓  ↑\n            Waiting/Blocked\n```\n\n- **New**: process being created\n- **Ready**: loaded in memory, waiting for CPU\n- **Running**: instructions executing on CPU\n- **Waiting**: waiting for I/O or an event (NOT using CPU)\n- **Terminated**: finished, waiting for parent to collect exit status\n\n**Key insight**: A process moves to Waiting only when it cannot proceed (e.g., waiting for disk). It never 'sleeps' while running.",
+          "estimatedSeconds": 85
+        }
+      ],
+      "assessments": {
+        "quiz": ["proc-q1", "proc-q2", "proc-q3"],
+        "explanation": ["proc-e1"],
+        "applied": ["proc-a1"],
+        "coding": ["proc-c1"]
+      }
+    },
+    {
+      "id": "os.process.scheduling",
+      "title": "CPU Scheduling Algorithms",
+      "domain": "os",
+      "prerequisites": ["os.process.basics"],
+      "learningObjectives": [
+        { "description": "Define and calculate turnaround time, waiting time, and CPU utilization", "bloomLevel": "apply" },
+        { "description": "Compare FCFS, SJF, Round Robin, and priority scheduling", "bloomLevel": "analyze" }
+      ],
+      "resources": [
+        {
+          "title": "OSTEP Chapter 7: Scheduling Introduction",
+          "url": "https://pages.cs.wisc.edu/~remzi/OSTEP/cpu-sched.pdf",
+          "type": "article",
+          "license": "CC BY-NC-ND 3.0",
+          "estimatedMinutes": 25
+        }
+      ],
+      "microLessons": [
+        {
+          "id": "sched-1",
+          "content": "## Scheduling Metrics\n\n- **Turnaround time** = completion time − arrival time (lower = better)\n- **Waiting time** = turnaround time − burst time\n- **Response time** = first run time − arrival time (important for interactive jobs)\n- **CPU utilization** = % of time CPU is doing useful work\n\nThere's a fundamental **trade-off**: optimising turnaround (run long jobs) vs. response time (run short jobs quickly).",
+          "estimatedSeconds": 80
+        },
+        {
+          "id": "sched-2",
+          "content": "## FCFS, SJF, Round Robin\n\n**FCFS (First Come First Served)**: Simple, but convoy effect — short jobs stuck behind long ones.\n\n**SJF (Shortest Job First)**: Optimal turnaround, but requires knowing burst time in advance (oracle problem). Preemptive version = SRTF.\n\n**Round Robin**: Each job gets a time quantum q. Good response time, but too small q → too many context switches; too large q → degenerates to FCFS.",
+          "estimatedSeconds": 85
+        }
+      ],
+      "assessments": {
+        "quiz": ["sched-q1", "sched-q2"],
+        "explanation": ["sched-e1"],
+        "applied": ["sched-a1"],
+        "coding": ["sched-c1"]
+      }
+    },
+    {
+      "id": "os.thread.basics",
+      "title": "Threads vs. Processes",
+      "domain": "os",
+      "prerequisites": ["os.process.basics"],
+      "learningObjectives": [
+        { "description": "Explain what threads share and what they don't within a process", "bloomLevel": "understand" },
+        { "description": "Distinguish user-level threads from kernel threads", "bloomLevel": "analyze" }
+      ],
+      "resources": [
+        {
+          "title": "OSTEP Chapter 26: Concurrency and Threads",
+          "url": "https://pages.cs.wisc.edu/~remzi/OSTEP/threads-intro.pdf",
+          "type": "article",
+          "license": "CC BY-NC-ND 3.0",
+          "estimatedMinutes": 25
+        }
+      ],
+      "microLessons": [
+        {
+          "id": "thread-1",
+          "content": "## Threads: Lightweight Processes\n\nA **thread** is a unit of execution within a process. Multiple threads in one process **share**:\n- Code segment\n- Data segment (globals, heap)\n- Open file descriptors\n\nEach thread has its **own**:\n- Program counter\n- Register set\n- Stack\n\n**Why threads?** Creating a process is expensive (fork + exec). Creating a thread is ~10-100× cheaper. Web servers use thread pools to handle concurrent requests.",
+          "estimatedSeconds": 85
+        }
+      ],
+      "assessments": {
+        "quiz": ["thread-q1", "thread-q2"],
+        "explanation": ["thread-e1"],
+        "applied": ["thread-a1"],
+        "coding": ["thread-c1"]
+      }
+    },
+    {
+      "id": "os.sync.mutex",
+      "title": "Mutexes & Semaphores",
+      "domain": "os",
+      "prerequisites": ["os.thread.basics"],
+      "learningObjectives": [
+        { "description": "Define race condition, critical section, and mutual exclusion", "bloomLevel": "understand" },
+        { "description": "Use a mutex and a semaphore correctly in pseudocode", "bloomLevel": "apply" },
+        { "description": "Explain why naive locking can cause priority inversion", "bloomLevel": "analyze" }
+      ],
+      "resources": [
+        {
+          "title": "OSTEP Chapter 28: Locks",
+          "url": "https://pages.cs.wisc.edu/~remzi/OSTEP/threads-locks.pdf",
+          "type": "article",
+          "license": "CC BY-NC-ND 3.0",
+          "estimatedMinutes": 30
+        }
+      ],
+      "microLessons": [
+        {
+          "id": "mutex-1",
+          "content": "## The Race Condition Problem\n\nTwo threads both do `counter++`. At the machine level:\n1. Load counter into register\n2. Increment register\n3. Store register to counter\n\nIf threads interleave steps, one update can be lost. This is a **race condition** — the result depends on the order of execution.\n\n**Fix**: Protect the **critical section** (shared data access) with a **mutex** (mutual exclusion lock).",
+          "estimatedSeconds": 85
+        },
+        {
+          "id": "mutex-2",
+          "content": "## Mutex vs. Semaphore\n\n**Mutex** = binary lock. Only the thread that acquired it can release it. Enforces ownership.\n\n**Semaphore** = counter. `wait()` decrements (blocks if 0), `signal()` increments. Can be used as:\n- **Binary semaphore**: like a mutex but without ownership\n- **Counting semaphore**: limit N concurrent accesses to a resource\n\n**Key difference**: Semaphores can be signalled by a *different* thread/process than the one that waited. Mutexes cannot.",
+          "estimatedSeconds": 90
+        }
+      ],
+      "assessments": {
+        "quiz": ["mutex-q1", "mutex-q2"],
+        "explanation": ["mutex-e1"],
+        "applied": ["mutex-a1"],
+        "coding": ["mutex-c1"]
+      }
+    },
+    {
+      "id": "os.sync.deadlock",
+      "title": "Deadlocks",
+      "domain": "os",
+      "prerequisites": ["os.sync.mutex"],
+      "learningObjectives": [
+        { "description": "State the four Coffman conditions for deadlock", "bloomLevel": "remember" },
+        { "description": "Use a resource-allocation graph to detect deadlock", "bloomLevel": "apply" },
+        { "description": "Compare prevention, avoidance, detection, and recovery strategies", "bloomLevel": "evaluate" }
+      ],
+      "resources": [
+        {
+          "title": "OSTEP Chapter 32: Common Concurrency Problems",
+          "url": "https://pages.cs.wisc.edu/~remzi/OSTEP/threads-bugs.pdf",
+          "type": "article",
+          "license": "CC BY-NC-ND 3.0",
+          "estimatedMinutes": 25
+        }
+      ],
+      "microLessons": [
+        {
+          "id": "deadlock-1",
+          "content": "## The Four Coffman Conditions\n\nA deadlock requires **all four** to hold simultaneously:\n1. **Mutual exclusion** — resources can't be shared\n2. **Hold and wait** — process holds ≥1 resource while waiting for more\n3. **No preemption** — resources can't be forcibly taken\n4. **Circular wait** — A waits for B, B waits for C, C waits for A\n\n**To prevent deadlock**: eliminate any one of these four. The simplest in practice: enforce a **total ordering** on resource acquisition (eliminates circular wait).",
+          "estimatedSeconds": 85
+        }
+      ],
+      "assessments": {
+        "quiz": ["deadlock-q1", "deadlock-q2"],
+        "explanation": ["deadlock-e1"],
+        "applied": ["deadlock-a1"],
+        "coding": ["deadlock-c1"]
+      }
+    },
+    {
+      "id": "os.memory.virtual",
+      "title": "Virtual Memory",
+      "domain": "os",
+      "prerequisites": ["os.process.basics"],
+      "learningObjectives": [
+        { "description": "Explain the purpose of virtual memory and address translation", "bloomLevel": "understand" },
+        { "description": "Describe how demand paging defers loading until needed", "bloomLevel": "understand" }
+      ],
+      "resources": [
+        {
+          "title": "OSTEP Chapter 13: The Abstraction: Address Spaces",
+          "url": "https://pages.cs.wisc.edu/~remzi/OSTEP/vm-intro.pdf",
+          "type": "article",
+          "license": "CC BY-NC-ND 3.0",
+          "estimatedMinutes": 20
+        }
+      ],
+      "microLessons": [
+        {
+          "id": "vm-1",
+          "content": "## Why Virtual Memory?\n\nWithout virtual memory, every program accesses physical RAM directly — programs could clobber each other. Virtual memory provides three benefits:\n1. **Isolation**: each process sees its own private address space\n2. **Abstraction**: processes don't need to know where in physical RAM they are\n3. **Overcommit**: the OS can give processes more virtual memory than physical RAM exists, paging to disk as needed\n\nEvery pointer in your program is a **virtual address**. The hardware (MMU) translates it to a **physical address** on every memory access.",
+          "estimatedSeconds": 85
+        }
+      ],
+      "assessments": {
+        "quiz": ["vm-q1", "vm-q2"],
+        "explanation": ["vm-e1"],
+        "applied": ["vm-a1"],
+        "coding": ["vm-c1"]
+      }
+    },
+    {
+      "id": "os.memory.paging",
+      "title": "Paging & Page Tables",
+      "domain": "os",
+      "prerequisites": ["os.memory.virtual"],
+      "learningObjectives": [
+        { "description": "Explain how paging divides virtual and physical memory into fixed-size pages/frames", "bloomLevel": "understand" },
+        { "description": "Trace a virtual-to-physical address translation through a page table", "bloomLevel": "apply" },
+        { "description": "Describe the page fault handling sequence", "bloomLevel": "understand" }
+      ],
+      "resources": [
+        {
+          "title": "OSTEP Chapter 18: Paging: Introduction",
+          "url": "https://pages.cs.wisc.edu/~remzi/OSTEP/vm-paging.pdf",
+          "type": "article",
+          "license": "CC BY-NC-ND 3.0",
+          "estimatedMinutes": 25
+        }
+      ],
+      "microLessons": [
+        {
+          "id": "paging-1",
+          "content": "## Pages and Frames\n\nPaging divides both virtual memory and physical RAM into equal-sized chunks:\n- **Page**: fixed-size chunk of virtual memory (typically 4KB)\n- **Frame**: same-size chunk of physical RAM\n\nThe OS maintains a **page table** per process mapping virtual page numbers (VPN) → physical frame numbers (PFN).\n\n**Address translation**: Split virtual address into VPN (high bits) + offset (low bits). Look up VPN in page table → PFN. Final address = PFN || offset.",
+          "estimatedSeconds": 85
+        },
+        {
+          "id": "paging-2",
+          "content": "## Page Faults\n\nIf a page is not in RAM (marked 'not present' in the page table), the CPU raises a **page fault exception**.\n\nThe OS page fault handler:\n1. Finds the page on disk (swap space)\n2. Picks a frame to evict (using LRU, clock, etc.)\n3. Loads the requested page into that frame\n4. Updates the page table entry\n5. Restarts the faulting instruction\n\nThe program never knows a page fault happened — it's transparent. This is demand paging.",
+          "estimatedSeconds": 90
+        }
+      ],
+      "assessments": {
+        "quiz": ["paging-q1", "paging-q2"],
+        "explanation": ["paging-e1"],
+        "applied": ["paging-a1"],
+        "coding": ["paging-c1"]
+      }
+    },
+    {
+      "id": "os.memory.segmentation",
+      "title": "Segmentation",
+      "domain": "os",
+      "prerequisites": ["os.memory.virtual"],
+      "learningObjectives": [
+        { "description": "Contrast segmentation with paging", "bloomLevel": "analyze" },
+        { "description": "Explain external fragmentation and how it arises", "bloomLevel": "understand" }
+      ],
+      "resources": [
+        {
+          "title": "OSTEP Chapter 16: Segmentation",
+          "url": "https://pages.cs.wisc.edu/~remzi/OSTEP/vm-segmentation.pdf",
+          "type": "article",
+          "license": "CC BY-NC-ND 3.0",
+          "estimatedMinutes": 20
+        }
+      ],
+      "microLessons": [
+        {
+          "id": "seg-1",
+          "content": "## Segmentation: Variable-Size Regions\n\nSegmentation divides memory into **variable-size logical units** (segments): code, stack, heap, etc. Each segment has a **base** (start in physical memory) and **limit** (length).\n\n**Advantage over paging**: No internal fragmentation — each segment is exactly as large as needed.\n\n**Disadvantage**: **External fragmentation** — over time, free memory is split into many small non-contiguous holes. Eventually the OS can't fit a new segment even though total free > segment size.",
+          "estimatedSeconds": 80
+        }
+      ],
+      "assessments": {
+        "quiz": ["seg-q1", "seg-q2"],
+        "explanation": ["seg-e1"],
+        "applied": ["seg-a1"],
+        "coding": ["seg-c1"]
+      }
+    },
+    {
+      "id": "os.memory.tlb",
+      "title": "TLB & Cache Hierarchy",
+      "domain": "os",
+      "prerequisites": ["os.memory.paging"],
+      "learningObjectives": [
+        { "description": "Explain why address translation without a TLB is too slow", "bloomLevel": "understand" },
+        { "description": "Describe TLB hit/miss handling and TLB shootdown", "bloomLevel": "understand" }
+      ],
+      "resources": [
+        {
+          "title": "OSTEP Chapter 19: Paging: Faster Translations (TLBs)",
+          "url": "https://pages.cs.wisc.edu/~remzi/OSTEP/vm-tlbs.pdf",
+          "type": "article",
+          "license": "CC BY-NC-ND 3.0",
+          "estimatedMinutes": 20
+        }
+      ],
+      "microLessons": [
+        {
+          "id": "tlb-1",
+          "content": "## The Translation Lookaside Buffer\n\nWithout a TLB, every memory access = look up page table (in RAM) + access actual data. That's 2 RAM accesses per instruction — unacceptably slow.\n\nThe **TLB** is a small, fast, fully-associative cache inside the CPU that stores recent VPN→PFN translations.\n\n**TLB hit** (common case): VPN found in TLB → translation in 1 clock cycle. **TLB miss**: must walk the page table in RAM, then cache the result in TLB.\n\nTypical TLB hit rate: >99%. This is why paging is practical.",
+          "estimatedSeconds": 85
+        }
+      ],
+      "assessments": {
+        "quiz": ["tlb-q1", "tlb-q2"],
+        "explanation": ["tlb-e1"],
+        "applied": ["tlb-a1"],
+        "coding": ["tlb-c1"]
+      }
+    },
+    {
+      "id": "os.storage.filesystem",
+      "title": "File Systems",
+      "domain": "os",
+      "prerequisites": ["os.process.basics"],
+      "learningObjectives": [
+        { "description": "Describe the structure of a typical Unix file system", "bloomLevel": "understand" },
+        { "description": "Explain the difference between a file's data and its metadata", "bloomLevel": "understand" }
+      ],
+      "resources": [
+        {
+          "title": "OSTEP Chapter 39: Files and Directories",
+          "url": "https://pages.cs.wisc.edu/~remzi/OSTEP/file-intro.pdf",
+          "type": "article",
+          "license": "CC BY-NC-ND 3.0",
+          "estimatedMinutes": 20
+        }
+      ],
+      "microLessons": [
+        {
+          "id": "fs-1",
+          "content": "## What a File System Does\n\nA file system answers: how do we store persistent data on disk and retrieve it by name?\n\nKey abstractions:\n- **File**: named sequence of bytes. The file system tracks where on disk the bytes live.\n- **Directory**: a file that maps names → inode numbers\n- **Path**: /usr/bin/python → root dir → usr dir → bin dir → file named 'python'\n\nThe file system is the OS subsystem that manages this mapping, handles buffering, and ensures consistency on crash.",
+          "estimatedSeconds": 80
+        }
+      ],
+      "assessments": {
+        "quiz": ["fs-q1", "fs-q2"],
+        "explanation": ["fs-e1"],
+        "applied": ["fs-a1"],
+        "coding": ["fs-c1"]
+      }
+    },
+    {
+      "id": "os.storage.inode",
+      "title": "Inodes & Directory Structure",
+      "domain": "os",
+      "prerequisites": ["os.storage.filesystem"],
+      "learningObjectives": [
+        { "description": "List the fields stored in a Unix inode", "bloomLevel": "remember" },
+        { "description": "Trace how the OS resolves a path like /usr/bin/ls to disk blocks", "bloomLevel": "apply" }
+      ],
+      "resources": [
+        {
+          "title": "OSTEP Chapter 40: File System Implementation",
+          "url": "https://pages.cs.wisc.edu/~remzi/OSTEP/file-implementation.pdf",
+          "type": "article",
+          "license": "CC BY-NC-ND 3.0",
+          "estimatedMinutes": 30
+        }
+      ],
+      "microLessons": [
+        {
+          "id": "inode-1",
+          "content": "## The Inode\n\nAn **inode** (index node) stores a file's metadata — everything except the file's *name*:\n- File type, permissions, owner\n- Size in bytes\n- Timestamps (ctime, mtime, atime)\n- Number of hard links\n- **Block pointers**: direct, indirect, double-indirect\n\n**Directories** map filenames to inode numbers. That's all they are. The name-to-inode separation enables **hard links**: two directory entries pointing to the same inode.",
+          "estimatedSeconds": 85
+        }
+      ],
+      "assessments": {
+        "quiz": ["inode-q1", "inode-q2"],
+        "explanation": ["inode-e1"],
+        "applied": ["inode-a1"],
+        "coding": ["inode-c1"]
+      }
+    },
+    {
+      "id": "os.io.basics",
+      "title": "I/O Subsystem",
+      "domain": "os",
+      "prerequisites": ["os.process.basics"],
+      "learningObjectives": [
+        { "description": "Explain polling vs. interrupt-driven I/O", "bloomLevel": "understand" },
+        { "description": "Describe how the OS uses device drivers to abstract hardware", "bloomLevel": "understand" }
+      ],
+      "resources": [
+        {
+          "title": "OSTEP Chapter 36: I/O Devices",
+          "url": "https://pages.cs.wisc.edu/~remzi/OSTEP/file-devices.pdf",
+          "type": "article",
+          "license": "CC BY-NC-ND 3.0",
+          "estimatedMinutes": 20
+        }
+      ],
+      "microLessons": [
+        {
+          "id": "io-1",
+          "content": "## Polling vs. Interrupts\n\n**Polling (busy-wait)**: CPU repeatedly checks the device's status register until I/O completes. Simple, but wastes CPU cycles.\n\n**Interrupt-driven**: CPU issues I/O request and continues other work. Device raises an interrupt when done; CPU handles the interrupt via an **interrupt service routine (ISR)** then resumes.\n\n**DMA (Direct Memory Access)**: For bulk data transfers, the DMA controller moves data between device and RAM without CPU involvement, raising a single interrupt when the transfer completes.",
+          "estimatedSeconds": 85
+        }
+      ],
+      "assessments": {
+        "quiz": ["io-q1", "io-q2"],
+        "explanation": ["io-e1"],
+        "applied": ["io-a1"],
+        "coding": ["io-c1"]
+      }
+    },
+    {
+      "id": "os.io.dma",
+      "title": "DMA & Interrupts",
+      "domain": "os",
+      "prerequisites": ["os.io.basics"],
+      "learningObjectives": [
+        { "description": "Trace a DMA disk read operation step by step", "bloomLevel": "apply" },
+        { "description": "Explain interrupt priority and masking", "bloomLevel": "understand" }
+      ],
+      "resources": [
+        {
+          "title": "OSTEP Chapter 36: I/O Devices (DMA section)",
+          "url": "https://pages.cs.wisc.edu/~remzi/OSTEP/file-devices.pdf",
+          "type": "article",
+          "license": "CC BY-NC-ND 3.0",
+          "estimatedMinutes": 15
+        }
+      ],
+      "microLessons": [
+        {
+          "id": "dma-1",
+          "content": "## DMA Step by Step\n\n1. CPU programs the DMA controller: source (disk), destination (RAM buffer), length.\n2. CPU returns to other work (or another process).\n3. DMA controller transfers data directly between disk and RAM — the CPU's memory bus is used, but CPU registers are free.\n4. When transfer completes, DMA raises an interrupt.\n5. CPU interrupt handler marks the waiting process as Ready.\n\n**Why DMA?** Without DMA, the CPU must copy each byte individually, wasting cycles. With DMA, CPU only pays the cost of setup + 1 interrupt.",
+          "estimatedSeconds": 85
+        }
+      ],
+      "assessments": {
+        "quiz": ["dma-q1", "dma-q2"],
+        "explanation": ["dma-e1"],
+        "applied": ["dma-a1"],
+        "coding": ["dma-c1"]
+      }
+    },
+    {
+      "id": "os.security.protection",
+      "title": "Protection Rings & Privilege Levels",
+      "domain": "os",
+      "prerequisites": ["os.process.basics"],
+      "learningObjectives": [
+        { "description": "Explain user mode vs. kernel mode and why the distinction exists", "bloomLevel": "understand" },
+        { "description": "Describe how system calls cross the user/kernel boundary", "bloomLevel": "understand" }
+      ],
+      "resources": [
+        {
+          "title": "OSTEP Chapter 6: Mechanism: Limited Direct Execution",
+          "url": "https://pages.cs.wisc.edu/~remzi/OSTEP/cpu-mechanisms.pdf",
+          "type": "article",
+          "license": "CC BY-NC-ND 3.0",
+          "estimatedMinutes": 20
+        }
+      ],
+      "microLessons": [
+        {
+          "id": "rings-1",
+          "content": "## User Mode vs. Kernel Mode\n\nModern CPUs have (at least) two privilege levels:\n- **User mode (ring 3)**: Normal application code. Cannot directly access hardware, modify page tables, or execute privileged instructions.\n- **Kernel mode (ring 0)**: OS code. Full access to hardware and all instructions.\n\n**Why?** If user code could directly talk to hardware, a buggy program could corrupt any file, crash the system, or spy on other processes. The boundary is enforced by the CPU, not software.",
+          "estimatedSeconds": 80
+        },
+        {
+          "id": "rings-2",
+          "content": "## System Calls: Controlled Entry to the Kernel\n\nTo access privileged operations, user programs make **system calls** (read, write, fork, etc.).\n\nThe `syscall` instruction:\n1. Saves user-mode register state\n2. Switches CPU to kernel mode\n3. Jumps to a pre-registered kernel handler (the **syscall table**)\n4. Kernel performs the operation\n5. Returns to user mode with the result\n\nUsers cannot jump to arbitrary kernel code — only the registered handlers. This is the security boundary.",
+          "estimatedSeconds": 85
+        }
+      ],
+      "assessments": {
+        "quiz": ["rings-q1", "rings-q2"],
+        "explanation": ["rings-e1"],
+        "applied": ["rings-a1"],
+        "coding": ["rings-c1"]
+      }
+    },
+    {
+      "id": "os.boot.sequence",
+      "title": "Boot Sequence & BIOS/UEFI",
+      "domain": "os",
+      "prerequisites": ["os.process.basics", "os.storage.filesystem"],
+      "learningObjectives": [
+        { "description": "Describe the steps from power-on to user login", "bloomLevel": "understand" },
+        { "description": "Distinguish BIOS from UEFI", "bloomLevel": "remember" }
+      ],
+      "resources": [
+        {
+          "title": "How Computers Boot Up — Linux From Scratch Project",
+          "url": "https://www.linuxfromscratch.org/lfs/view/stable/chapter09/bootscripts.html",
+          "type": "article",
+          "license": "MIT / Open Publication License",
+          "estimatedMinutes": 15
+        }
+      ],
+      "microLessons": [
+        {
+          "id": "boot-1",
+          "content": "## Boot Sequence Overview\n\n1. **Power On**: CPU resets, begins executing from a fixed address (0xFFFF0 for BIOS, EFI start for UEFI)\n2. **POST** (Power-On Self Test): Hardware sanity checks\n3. **BIOS/UEFI**: Initializes hardware, finds bootable device\n4. **Bootloader** (GRUB, systemd-boot): Loads kernel image into RAM\n5. **Kernel init**: Sets up memory management, device drivers, root filesystem\n6. **Init process** (PID 1 — systemd/init): Starts user-space services\n7. **Login prompt / desktop**\n\nThe whole sequence typically takes 5-30 seconds depending on hardware.",
+          "estimatedSeconds": 85
+        }
+      ],
+      "assessments": {
+        "quiz": ["boot-q1", "boot-q2"],
+        "explanation": ["boot-e1"],
+        "applied": ["boot-a1"],
+        "coding": ["boot-c1"]
+      }
+    }
+  ]
+}

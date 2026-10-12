@@ -1,0 +1,24 @@
+{
+  "summaries": {
+    "array-basics": {
+      "summary": "Arrays are fundamental data structures that store elements in contiguous memory locations, allowing O(1) access time through indexing. They are fixed-size and provide efficient element retrieval.",
+      "whyItMatters": "Arrays are the foundation for more complex data structures and are used extensively in algorithms. Understanding array operations is crucial for writing efficient code and solving computational problems.",
+      "commonMisconceptions": [
+        "Arrays are always the best choice for storing data",
+        "Insertion and deletion are as fast as access",
+        "Arrays can grow dynamically in all languages"
+      ]
+    },
+    "linked-list": {
+      "summary": "Linked lists are dynamic data structures where each element (node) contains data and a reference to the next node. They excel at insertions and deletions but have slower access times than arrays.",
+      "whyItMatters": "Linked lists demonstrate the trade-offs in data structure design between access speed and modification flexibility. They're fundamental to understanding pointers and memory management.",
+      "commonMisconceptions": [
+        "Linked lists are always better than arrays",
+        "Accessing middle elements is still O(1)",
+        "All linked lists are doubly linked"
+      ]
+    }
+  },
+  "questions": [],
+  "explanationGrades": []
+}

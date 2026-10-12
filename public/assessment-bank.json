@@ -1,0 +1,348 @@
+{
+  "version": "1.0",
+  "questions": [
+    {
+      "id": "big-o-q1",
+      "conceptId": "dsa.complexity.big-o",
+      "type": "mcq",
+      "difficulty": "beginner",
+      "subtopic": "definitions",
+      "prompt": "Which of the following correctly describes Big-O notation?",
+      "options": [
+        "It represents the exact number of operations an algorithm performs",
+        "It represents an upper bound on an algorithm's growth rate as input size increases",
+        "It represents the average-case running time of an algorithm",
+        "It represents the memory usage of an algorithm"
+      ],
+      "correctIndex": 1,
+      "explanation": "Big-O notation is an asymptotic upper bound. f(n) = O(g(n)) means f grows no faster than g for large n (up to a constant factor). It says nothing about exact operation counts or average vs worst case."
+    },
+    {
+      "id": "big-o-q2",
+      "conceptId": "dsa.complexity.big-o",
+      "type": "mcq",
+      "difficulty": "intermediate",
+      "subtopic": "analysis",
+      "prompt": "What is the time complexity of this code?\n```python\nfor i in range(n):\n    for j in range(n):\n        print(i + j)\n```",
+      "options": ["O(n)", "O(n log n)", "O(n²)", "O(2n)"],
+      "correctIndex": 2,
+      "explanation": "The outer loop runs n times and the inner loop runs n times for each outer iteration, giving n × n = n² total print operations, hence O(n²)."
+    },
+    {
+      "id": "big-o-q3",
+      "conceptId": "dsa.complexity.big-o",
+      "type": "multi-select",
+      "difficulty": "intermediate",
+      "subtopic": "simplification",
+      "prompt": "Which of the following are correct simplifications? (Select all that apply)",
+      "options": [
+        "O(5n + 3) = O(n)",
+        "O(n² + n) = O(n²)",
+        "O(2ⁿ + n³) = O(n³)",
+        "O(100) = O(1)"
+      ],
+      "correctIndices": [0, 1, 3],
+      "explanation": "We drop constants and lower-order terms. O(5n+3)=O(n) ✓, O(n²+n)=O(n²) ✓, O(100)=O(1) ✓. But O(2ⁿ+n³)=O(2ⁿ) because exponential dominates polynomial, so option 3 is wrong."
+    },
+    {
+      "id": "big-o-e1",
+      "conceptId": "dsa.complexity.big-o",
+      "type": "explain-it",
+      "difficulty": "intermediate",
+      "subtopic": "understanding",
+      "prompt": "In your own words, explain why we drop constant factors in Big-O notation. Give a concrete example to support your explanation.",
+      "rubric": [
+        "Mentions that constant factors depend on hardware/language/compiler, not the algorithm itself",
+        "Explains that Big-O focuses on relative growth rate as n → ∞, not exact counts",
+        "Provides a concrete example (e.g., O(2n) vs O(n) — both grow linearly so both are O(n))"
+      ],
+      "modelAnswer": "We drop constant factors because Big-O is about asymptotic growth — how an algorithm scales as n grows very large, not what happens for small n or on specific hardware. For example, 2n and n both grow linearly; the 2× difference is absorbed by the constant c in the formal definition. What matters is: does the algorithm scale linearly, quadratically, logarithmically, etc.?"
+    },
+    {
+      "id": "big-o-a1",
+      "conceptId": "dsa.complexity.big-o",
+      "type": "trace-output",
+      "difficulty": "intermediate",
+      "subtopic": "analysis",
+      "prompt": "What does this code output for n = 4? Then determine its time complexity.\n```python\ncount = 0\nfor i in range(n):\n    j = 1\n    while j < n:\n        count += 1\n        j *= 2\nprint(count)\n```",
+      "answer": "8",
+      "complexityAnswer": "O(n log n)",
+      "explanation": "The inner while loop doubles j each time, so it runs log₂(n) times. The outer loop runs n times. Total = n × log₂(n). For n=4: log₂(4)=2, so count = 4×2 = 8."
+    },
+    {
+      "id": "big-o-c1",
+      "conceptId": "dsa.complexity.big-o",
+      "type": "coding",
+      "difficulty": "beginner",
+      "subtopic": "implementation",
+      "title": "Count Operations",
+      "prompt": "Write a function `count_steps(n)` that returns the number of times `count` is incremented in this nested loop pattern:\n```\nfor i in range(n):\n    for j in range(i):  # inner loop goes from 0 to i-1\n        count += 1\n```\n\nFor example: `count_steps(4)` should return `6` (0+1+2+3).\n\n**Hint**: There's a mathematical closed form — no need to actually run the loop.",
+      "starterCode": "def count_steps(n: int) -> int:\n    # Your solution here\n    pass",
+      "language": "python",
+      "testCases": [
+        { "input": "0", "expected": "0" },
+        { "input": "1", "expected": "0" },
+        { "input": "4", "expected": "6" },
+        { "input": "5", "expected": "10" },
+        { "input": "10", "expected": "45" },
+        { "input": "100", "expected": "4950" }
+      ],
+      "hints": [
+        "Think about the sum 0 + 1 + 2 + ... + (n-1)",
+        "Gauss's formula: sum of 0..n-1 = n*(n-1)/2",
+        "The answer is n*(n-1)//2 — this also tells you the time complexity is O(n²)"
+      ],
+      "editorial": "The inner loop runs i times for each i from 0 to n-1. Total = 0+1+2+...+(n-1) = n(n-1)/2 = O(n²). Solution: `return n * (n - 1) // 2`"
+    },
+    {
+      "id": "array-basics-q1",
+      "conceptId": "dsa.array.basics",
+      "type": "mcq",
+      "difficulty": "beginner",
+      "subtopic": "memory-layout",
+      "prompt": "An integer array `arr` starts at memory address 1000. Each integer is 4 bytes. What is the address of `arr[5]`?",
+      "options": ["1005", "1020", "1040", "1025"],
+      "correctIndex": 1,
+      "explanation": "address(i) = base + i × element_size = 1000 + 5 × 4 = 1020."
+    },
+    {
+      "id": "array-basics-q2",
+      "conceptId": "dsa.array.basics",
+      "type": "mcq",
+      "difficulty": "intermediate",
+      "subtopic": "dynamic-arrays",
+      "prompt": "Why is appending to a Python list 'amortised O(1)' rather than always O(1)?",
+      "options": [
+        "Because Python lists use linked lists internally",
+        "Because occasionally the list must be copied to a new, larger allocation",
+        "Because Python's garbage collector interferes during append",
+        "Because Python lists are thread-safe and require locking"
+      ],
+      "correctIndex": 1,
+      "explanation": "When a Python list's backing array is full, it allocates a new array (typically 2× size) and copies all elements. This copy is O(n), but it happens rarely enough that averaged over all appends, the cost per append is O(1) amortised."
+    },
+    {
+      "id": "array-basics-e1",
+      "conceptId": "dsa.array.basics",
+      "type": "explain-it",
+      "difficulty": "intermediate",
+      "subtopic": "memory-layout",
+      "prompt": "Explain why random access to an array element is O(1), and why the same property does NOT hold for a linked list.",
+      "rubric": [
+        "Explains the address = base + i × size formula for arrays (constant-time computation)",
+        "Notes that linked list nodes can be anywhere in memory — must traverse from head",
+        "Correctly states linked list random access is O(n)"
+      ],
+      "modelAnswer": "Array access is O(1) because all elements are the same size and stored contiguously. Given index i, the address is computed in one step: base + i × element_size. No searching needed. A linked list node can be anywhere in memory; you must follow next pointers from the head, requiring O(n) steps to reach the i-th node."
+    },
+    {
+      "id": "array-basics-a1",
+      "conceptId": "dsa.array.basics",
+      "type": "spot-bug",
+      "difficulty": "intermediate",
+      "subtopic": "implementation",
+      "prompt": "This function is supposed to reverse an array in place. Find and explain the bug:\n```python\ndef reverse(arr):\n    n = len(arr)\n    for i in range(n):  # Bug is here\n        arr[i], arr[n - 1 - i] = arr[n - 1 - i], arr[i]\n    return arr\n```",
+      "answer": "The loop runs for the full n iterations instead of n//2. After the first half swaps the array correctly, the second half swaps everything back. Fix: `range(n // 2)`.",
+      "explanation": "After n//2 iterations the array is already reversed. Continuing swaps each pair again, undoing the reversal."
+    },
+    {
+      "id": "array-basics-c1",
+      "conceptId": "dsa.array.basics",
+      "type": "coding",
+      "difficulty": "beginner",
+      "subtopic": "implementation",
+      "title": "Running Sum",
+      "prompt": "Given an array `nums`, return a new array `result` where `result[i]` is the sum of `nums[0..i]` (inclusive). This is called the prefix sum or running sum.\n\nExample: `running_sum([1, 2, 3, 4])` → `[1, 3, 6, 10]`",
+      "starterCode": "def running_sum(nums: list[int]) -> list[int]:\n    pass",
+      "language": "python",
+      "testCases": [
+        { "input": "[1, 2, 3, 4]", "expected": "[1, 3, 6, 10]" },
+        { "input": "[1, 1, 1, 1, 1]", "expected": "[1, 2, 3, 4, 5]" },
+        { "input": "[3, 1, 2, 10, 1]", "expected": "[3, 4, 6, 16, 17]" },
+        { "input": "[0]", "expected": "[0]" }
+      ],
+      "hints": [
+        "Iterate through the array, keeping a running total",
+        "For each index i, result[i] = result[i-1] + nums[i]",
+        "No extra space needed if you modify in place, or use a separate result list"
+      ],
+      "editorial": "def running_sum(nums):\n    result = []\n    total = 0\n    for n in nums:\n        total += n\n        result.append(total)\n    return result\n\nTime: O(n), Space: O(n)"
+    },
+    {
+      "id": "two-ptr-q1",
+      "conceptId": "dsa.array.two-pointers",
+      "type": "mcq",
+      "difficulty": "intermediate",
+      "subtopic": "pattern",
+      "prompt": "The two-pointer technique on a sorted array achieves O(n) instead of O(n²) for pair problems because:",
+      "options": [
+        "It uses binary search to find each element",
+        "At each step, at least one pointer advances, so the total moves are bounded by n",
+        "Sorted arrays have a mathematical shortcut that removes duplicate checks",
+        "Two pointers can share CPU cache lines efficiently"
+      ],
+      "correctIndex": 1,
+      "explanation": "Each pointer can only move in one direction and stops when they meet. Combined, the two pointers make at most n moves total, giving O(n) regardless of input."
+    },
+    {
+      "id": "two-ptr-q2",
+      "conceptId": "dsa.array.two-pointers",
+      "type": "mcq",
+      "difficulty": "intermediate",
+      "subtopic": "correctness",
+      "prompt": "The two-pointer pair-sum algorithm requires the input array to be sorted. What happens if you apply it to an unsorted array?",
+      "options": [
+        "It still works correctly, just slower",
+        "It may miss valid pairs because the logic of moving pointers depends on sorted order",
+        "It will raise an index out of bounds error",
+        "It gives the same result because pointer logic is independent of order"
+      ],
+      "correctIndex": 1,
+      "explanation": "The algorithm decides to move left++ or right-- based on whether the sum is too small or too large. This reasoning is only valid if the array is sorted — moving left pointer only increases the sum in a sorted array."
+    },
+    {
+      "id": "two-ptr-e1",
+      "conceptId": "dsa.array.two-pointers",
+      "type": "explain-it",
+      "difficulty": "intermediate",
+      "subtopic": "pattern",
+      "prompt": "Explain in your own words why the two-pointer approach for checking if a string is a palindrome works. What is the loop invariant?",
+      "rubric": [
+        "Correctly states that left and right start at opposite ends and move inward",
+        "Identifies that at each step we compare arr[left] and arr[right]",
+        "States the invariant: the substring [0..left-1] and [right+1..n-1] have already been verified to match"
+      ],
+      "modelAnswer": "We maintain two pointers, left starting at 0 and right at n-1. At each step, we compare the characters at these positions. If they match, we move left forward and right backward. The loop invariant is: all characters outside [left, right] have already been verified to match their mirror. If any mismatch is found, the string is not a palindrome. If pointers meet/cross without mismatch, it is."
+    },
+    {
+      "id": "two-ptr-a1",
+      "conceptId": "dsa.array.two-pointers",
+      "type": "trace-output",
+      "difficulty": "intermediate",
+      "subtopic": "trace",
+      "prompt": "Trace the two-pointer algorithm on `arr = [1, 3, 5, 7, 9]` looking for a pair that sums to 12. List the (left, right) pairs checked in order.",
+      "answer": "(0,4): 1+9=10 < 12, move left. (1,4): 3+9=12 == target, found!",
+      "explanation": "Start: left=0, right=4, sum=1+9=10 < 12, so left++. left=1, right=4, sum=3+9=12 = target. Done in 2 steps."
+    },
+    {
+      "id": "two-ptr-c1",
+      "conceptId": "dsa.array.two-pointers",
+      "type": "coding",
+      "difficulty": "intermediate",
+      "subtopic": "implementation",
+      "title": "Valid Palindrome",
+      "prompt": "A phrase is a palindrome if, after converting all uppercase letters to lowercase and removing all non-alphanumeric characters, it reads the same forward and backward.\n\nReturn `True` if `s` is a palindrome, `False` otherwise.\n\nExamples:\n- `is_palindrome('A man, a plan, a canal: Panama')` → `True`\n- `is_palindrome('race a car')` → `False`\n- `is_palindrome(' ')` → `True`",
+      "starterCode": "def is_palindrome(s: str) -> bool:\n    pass",
+      "language": "python",
+      "testCases": [
+        { "input": "\"A man, a plan, a canal: Panama\"", "expected": "True" },
+        { "input": "\"race a car\"", "expected": "False" },
+        { "input": "\" \"", "expected": "True" },
+        { "input": "\"0P\"", "expected": "False" }
+      ],
+      "hints": [
+        "Use two pointers starting at the ends",
+        "Skip non-alphanumeric characters by advancing the pointer",
+        "Compare lowercase versions of characters"
+      ],
+      "editorial": "def is_palindrome(s):\n    left, right = 0, len(s) - 1\n    while left < right:\n        while left < right and not s[left].isalnum(): left += 1\n        while left < right and not s[right].isalnum(): right -= 1\n        if s[left].lower() != s[right].lower(): return False\n        left += 1; right -= 1\n    return True"
+    },
+    {
+      "id": "proc-q1",
+      "conceptId": "os.process.basics",
+      "type": "mcq",
+      "difficulty": "beginner",
+      "subtopic": "definitions",
+      "prompt": "What is the key difference between a program and a process?",
+      "options": [
+        "A program is written in a high-level language; a process is in machine code",
+        "A program is a passive set of instructions on disk; a process is a program in execution",
+        "A process is a program that uses multiple threads",
+        "A program runs in kernel mode; a process runs in user mode"
+      ],
+      "correctIndex": 1,
+      "explanation": "A program is static — it's just bytes on disk. A process is dynamic — it's the OS's representation of a running program, with allocated memory, a CPU context, open files, etc."
+    },
+    {
+      "id": "proc-q2",
+      "conceptId": "os.process.basics",
+      "type": "mcq",
+      "difficulty": "intermediate",
+      "subtopic": "pcb",
+      "prompt": "When the OS performs a context switch from process A to process B, what must it save?",
+      "options": [
+        "Only the program counter of process A",
+        "All CPU registers (including PC, stack pointer, and general-purpose registers) of process A",
+        "The entire heap memory of process A",
+        "The page table of process B"
+      ],
+      "correctIndex": 1,
+      "explanation": "A context switch saves the entire CPU state of the outgoing process (all registers, including PC and SP) in its PCB, then loads the saved state from process B's PCB. The heap is already in memory — no need to save it separately."
+    },
+    {
+      "id": "proc-q3",
+      "conceptId": "os.process.basics",
+      "type": "multi-select",
+      "difficulty": "intermediate",
+      "subtopic": "process-states",
+      "prompt": "Which of the following correctly describe transitions in the process state model? (Select all that apply)",
+      "options": [
+        "Running → Waiting: occurs when a process requests I/O",
+        "Waiting → Running: occurs directly when I/O completes",
+        "Ready → Running: occurs when the scheduler selects this process",
+        "Running → Ready: occurs when a timer interrupt preempts the process"
+      ],
+      "correctIndices": [0, 2, 3],
+      "explanation": "When I/O completes, the process moves from Waiting to Ready (not directly to Running — it must wait to be scheduled). Options A, C, D are all correct transitions."
+    },
+    {
+      "id": "proc-e1",
+      "conceptId": "os.process.basics",
+      "type": "explain-it",
+      "difficulty": "intermediate",
+      "subtopic": "pcb",
+      "prompt": "Explain what a context switch is, what information is saved, and why it is necessary for a multitasking OS.",
+      "rubric": [
+        "Defines context switch as saving one process's CPU state and loading another's",
+        "Mentions specific saved state: registers, PC, stack pointer",
+        "Explains why it's needed: to share one CPU among multiple processes (time-sharing)"
+      ],
+      "modelAnswer": "A context switch is the mechanism by which the OS switches the CPU from running one process to another. The OS saves the running process's CPU state (all registers, program counter, stack pointer) into its PCB, then loads the saved state from the next process's PCB. This is necessary because a single CPU can only execute one set of instructions at a time, but we want multiple processes to appear to run concurrently. Context switches create the illusion of parallelism on a single core."
+    },
+    {
+      "id": "proc-a1",
+      "conceptId": "os.process.basics",
+      "type": "trace-output",
+      "difficulty": "intermediate",
+      "subtopic": "process-states",
+      "prompt": "Process P1 is Running and issues a disk read. Process P2 is in the Ready queue. The disk completes P1's read while P2 is running. Trace the state of P1 through these events, listing each state in order.",
+      "answer": "Running → Waiting (issued disk read) → Ready (disk I/O complete, P2 is running) → Running (scheduler picks P1)",
+      "explanation": "P1 cannot go directly from Waiting to Running because P2 is currently on the CPU. It must go to Ready first, then be scheduled."
+    },
+    {
+      "id": "proc-c1",
+      "conceptId": "os.process.basics",
+      "type": "coding",
+      "difficulty": "intermediate",
+      "subtopic": "simulation",
+      "title": "Process State Simulator",
+      "prompt": "Simulate a simple process state machine. Implement a `Process` class with:\n- `state`: one of 'new', 'ready', 'running', 'waiting', 'terminated'\n- `admit()`: new → ready\n- `schedule()`: ready → running  \n- `io_request()`: running → waiting\n- `io_complete()`: waiting → ready\n- `complete()`: running → terminated\n- `preempt()`: running → ready\n\nEach method should raise `ValueError` if the transition is invalid from the current state.",
+      "starterCode": "class Process:\n    def __init__(self, pid: int):\n        self.pid = pid\n        self.state = 'new'\n    \n    def admit(self):\n        pass\n    \n    def schedule(self):\n        pass\n    \n    def io_request(self):\n        pass\n    \n    def io_complete(self):\n        pass\n    \n    def complete(self):\n        pass\n    \n    def preempt(self):\n        pass",
+      "language": "python",
+      "testCases": [
+        { "input": "p = Process(1); p.admit(); p.state", "expected": "'ready'" },
+        { "input": "p = Process(1); p.admit(); p.schedule(); p.state", "expected": "'running'" },
+        { "input": "p = Process(1); p.admit(); p.schedule(); p.io_request(); p.state", "expected": "'waiting'" },
+        { "input": "p = Process(1); p.admit(); p.schedule(); p.io_request(); p.io_complete(); p.state", "expected": "'ready'" },
+        { "input": "p = Process(1); p.admit(); p.schedule(); p.complete(); p.state", "expected": "'terminated'" },
+        { "input": "try:\n    p = Process(1); p.admit(); p.io_request()\nexcept ValueError:\n    'caught'\nelse:\n    'missed'", "expected": "'caught'" }
+      ],
+      "hints": [
+        "Store valid transitions as a dict: {current_state: [valid_next_states]}",
+        "Check if the transition is valid before changing state",
+        "Raise ValueError with a descriptive message for invalid transitions"
+      ],
+      "editorial": "VALID_TRANSITIONS = {\n    'new': ['ready'],\n    'ready': ['running'],\n    'running': ['waiting', 'terminated', 'ready'],\n    'waiting': ['ready'],\n    'terminated': []\n}\n\ndef transition(self, new_state):\n    if new_state not in VALID_TRANSITIONS[self.state]:\n        raise ValueError(f'Invalid: {self.state} → {new_state}')\n    self.state = new_state"
+    }
+  ]
+}
