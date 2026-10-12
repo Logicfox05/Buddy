@@ -8,6 +8,9 @@
 
 import Dexie, { Table } from 'dexie';
 import type { MasteryRecord } from '@/domain/mastery/MasteryStateMachine';
+import { createMasteryRecord } from '@/domain/mastery/MasteryStateMachine';
+import { KnowledgeGraph } from '@/domain/graph/KnowledgeGraph';
+import type { Curriculum } from '@/types/concept';
 import type { ScheduledCard } from '@/domain/scheduler/types';
 
 // ── Table row types ───────────────────────────────────────────────────────────
@@ -147,6 +150,29 @@ export class BuddyDatabase extends Dexie {
     };
     await this.userSettings.put(defaults);
     return defaults;
+  }
+
+  async initializeCurriculumState(curriculum: Curriculum): Promise<void> {
+    const existingCount = await this.masteryRecords.count();
+    if (existingCount > 0) return;
+
+    const graph = new KnowledgeGraph();
+    graph.load(curriculum);
+    const availableIds = new Set(
+      graph.getAvailable(new Set<string>()).map((c) => c.id)
+    );
+
+    const records: MasteryRecord[] = curriculum.concepts.map((concept) => {
+      const record = createMasteryRecord(concept.id);
+      if (availableIds.has(concept.id)) {
+        record.state = 'available';
+      }
+      return record;
+    });
+
+    await this.masteryRecords.bulkPut(records);
+    await this.getOrCreateEngagement();
+    await this.getOrCreateSettings();
   }
 
   // ── Backup & restore ────────────────────────────────────────────────────────

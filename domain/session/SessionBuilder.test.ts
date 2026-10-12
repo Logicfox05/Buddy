@@ -15,22 +15,24 @@ const mockAvailableConcepts: Concept[] = [
     title: 'Two Pointers',
     domain: 'dsa',
     prerequisites: ['dsa.array.basics'],
-    bloomLevel: 3,
-    objectives: ['Learn two pointers'],
+    learningObjectives: [
+      { description: 'Learn two pointers', bloomLevel: 'apply' },
+    ],
     resources: [],
     microLessons: [],
-    assessmentBank: [],
+    assessments: { quiz: [], explanation: [], applied: [], coding: [] },
   },
   {
     id: 'dsa.linkedlist.singly',
     title: 'Singly Linked List',
     domain: 'dsa',
     prerequisites: ['dsa.array.basics'],
-    bloomLevel: 2,
-    objectives: ['Learn linked lists'],
+    learningObjectives: [
+      { description: 'Learn linked lists', bloomLevel: 'understand' },
+    ],
     resources: [],
     microLessons: [],
-    assessmentBank: [],
+    assessments: { quiz: [], explanation: [], applied: [], coding: [] },
   },
 ];
 
