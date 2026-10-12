@@ -47,15 +47,19 @@ export function buildSession(
   const dueReviews: string[] = [];
   const newConcepts: string[] = [];
 
-  // Fill up to maxCards with due reviews
+  // In 5-minute mode, reserve 1 slot for a new concept if available
+  const wantNew = availableConcepts.length > 0;
+  const maxReviews = opts.mode === '5-minute' ? (wantNew ? 2 : 3) : maxCards;
+
+  // Fill reviews
   for (const item of sortedDue) {
-    if (dueReviews.length >= maxCards) break;
+    if (dueReviews.length >= maxReviews) break;
     dueReviews.push(item.conceptId);
   }
 
-  // If room remains, add new concepts
+  // Fill new concepts up to remaining capacity
   const remaining = maxCards - dueReviews.length;
-  const newToAdd = opts.mode === '5-minute' ? 1 : remaining;
+  const newToAdd = opts.mode === '5-minute' ? Math.min(1, remaining) : remaining;
   for (let i = 0; i < Math.min(newToAdd, availableConcepts.length); i++) {
     newConcepts.push(availableConcepts[i].id);
   }
