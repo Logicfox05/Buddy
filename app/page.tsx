@@ -7,7 +7,8 @@ import type { Curriculum, Concept } from '@/types/concept';
 import type { MasteryRecord } from '@/domain/mastery/MasteryStateMachine';
 import type { ScheduledCard, DueItem } from '@/domain/scheduler/types';
 import { getDueItems } from '@/domain/scheduler/SchedulerService';
-import { buildSession } from '@/domain/session/SessionBuilder';
+import { buildSession, type SessionPlan } from '@/domain/session/SessionBuilder';
+import { EngagementEngine } from '@/lib/engagement/engagement-engine';
 
 export default function HomePage() {
   const [curriculum, setCurriculum] = useState<Curriculum | null>(null);
@@ -16,7 +17,17 @@ export default function HomePage() {
   const [records, setRecords] = useState<MasteryRecord[]>([]);
   const [dueItems, setDueItems] = useState<DueItem[]>([]);
   const [nextToLearn, setNextToLearn] = useState<Concept | null>(null);
+  const [availableConcepts, setAvailableConcepts] = useState<Concept[]>([]);
   const [loading, setLoading] = useState(true);
+
+  // Session state
+  const [activeSession, setActiveSession] = useState<SessionPlan | null>(null);
+  const [sessionModalOpen, setSessionModalOpen] = useState(false);
+  const [sessionMode, setSessionMode] = useState<'5-minute' | 'low-motivation'>('5-minute');
+
+  // Variable reward state
+  const [bonusChallengeOpen, setBonusChallengeOpen] = useState(false);
+  const [bonusClaimed, setBonusClaimed] = useState(false);
 
   useEffect(() => {
     async function loadDashboard() {
@@ -41,14 +52,26 @@ export default function HomePage() {
         const due = getDueItems(allCards);
         setDueItems(due);
 
+        // Filter available concepts
+        const availList = curData.concepts.filter((c) => {
+          const rec = allRecords.find((r) => r.conceptId === c.id);
+          return rec?.state === 'available' || rec?.state === 'learning';
+        });
+        setAvailableConcepts(availList);
+
         // Find next concept ready to learn
         const availableRecord = allRecords.find((r) => r.state === 'available' || r.state === 'learning');
         if (availableRecord) {
           const match = curData.concepts.find((c) => c.id === availableRecord.conceptId);
           setNextToLearn(match ?? null);
         } else {
-          // Default to first concept
           setNextToLearn(curData.concepts[0] ?? null);
+        }
+
+        // Variable reward random challenge check (Task 9.8)
+        const engine = new EngagementEngine();
+        if (userSet.challengeCardEnabled && engine.shouldShowChallenge()) {
+          setBonusChallengeOpen(true);
         }
       } catch (err) {
         console.error('Failed to load dashboard:', err);
@@ -69,7 +92,6 @@ export default function HomePage() {
   }
 
   const masteredCount = records.filter((r) => r.state === 'mastered').length;
-  const learningCount = records.filter((r) => r.state === 'learning' || r.state === 'proving').length;
 
   const handleExportBackup = async () => {
     const data = await db.exportAll();
@@ -82,8 +104,36 @@ export default function HomePage() {
     URL.revokeObjectURL(url);
   };
 
+  const handleStartSession = (mode: '5-minute' | 'low-motivation') => {
+    setSessionMode(mode);
+    const plan = buildSession(
+      dueItems,
+      availableConcepts,
+      mode === 'low-motivation'
+        ? { mode: '5-minute', maxCards: 1, interleave: false }
+        : { mode: '5-minute', maxCards: 3, interleave: true }
+    );
+    setActiveSession(plan);
+    setSessionModalOpen(true);
+  };
+
+  const handleClaimBonusXP = async () => {
+    if (!engagement || bonusClaimed) return;
+    const updatedXP = engagement.xp + 50;
+    const engine = new EngagementEngine();
+    const updatedLevel = engine.calculateLevel(updatedXP);
+    const updatedState = { ...engagement, xp: updatedXP, level: updatedLevel };
+    await db.engagementState.put(updatedState);
+    setEngagement(updatedState);
+    setBonusClaimed(true);
+    setTimeout(() => {
+      setBonusChallengeOpen(false);
+      setBonusClaimed(false);
+    }, 1500);
+  };
+
   return (
-    <div className="min-h-screen pb-24 p-4 max-w-lg mx-auto space-y-6">
+    <div className="min-h-screen pb-28 p-4 max-w-lg mx-auto space-y-6">
       {/* Header */}
       <div className="pt-3">
         <div className="flex items-center justify-between">
@@ -182,22 +232,22 @@ export default function HomePage() {
 
             <Link
               href={`/lesson/${nextToLearn.id}`}
-              className="block w-full py-3 px-4 rounded-xl font-bold text-sm bg-indigo-600 hover:bg-indigo-500 text-white text-center shadow-lg shadow-indigo-600/30 transition-all"
+              className="block w-full py-3 px-4 rounded-xl font-bold text-sm bg-indigo-600 hover:bg-indigo-500 text-white text-center shadow-lg shadow-indigo-600/30 transition-all active:scale-[0.99]"
             >
               Continue Learning →
             </Link>
           </div>
         )}
 
-        {/* 5-Minute Quick Session Mode */}
+        {/* 5-Minute Quick Session Mode & Low Motivation Mode */}
         <div className="bg-slate-900 border border-slate-800 rounded-3xl p-5 shadow-xl space-y-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <span className="text-xl">⏱️</span>
               <div>
-                <h3 className="font-bold text-white text-sm">5-Minute Mode</h3>
+                <h3 className="font-bold text-white text-sm">Quick Session Mode</h3>
                 <p className="text-xs text-slate-400">
-                  Quick session: 2 spaced reviews + 1 new concept card
+                  Curated daily burst: due reviews + new concept
                 </p>
               </div>
             </div>
@@ -206,12 +256,23 @@ export default function HomePage() {
             </span>
           </div>
 
-          <Link
-            href={nextToLearn ? `/lesson/${nextToLearn.id}` : '/map'}
-            className="block w-full py-2.5 px-4 rounded-xl font-semibold text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 text-center border border-slate-700 transition-colors"
-          >
-            Start 5-Minute Session
-          </Link>
+          <div className="grid grid-cols-2 gap-2 pt-1">
+            <button
+              onClick={() => handleStartSession('5-minute')}
+              className="py-2.5 px-3 rounded-xl font-semibold text-xs bg-indigo-600/20 hover:bg-indigo-600/30 border border-indigo-500/30 text-indigo-300 text-center transition-colors flex items-center justify-center gap-1.5"
+            >
+              <span>⚡</span>
+              <span>5-Minute Session</span>
+            </button>
+
+            <button
+              onClick={() => handleStartSession('low-motivation')}
+              className="py-2.5 px-3 rounded-xl font-semibold text-xs bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 text-center transition-colors flex items-center justify-center gap-1.5"
+            >
+              <span>🌱</span>
+              <span>Just 1 Card Mode</span>
+            </button>
+          </div>
         </div>
       </div>
 
@@ -278,6 +339,114 @@ export default function HomePage() {
           Explore Tree →
         </Link>
       </div>
+
+      {/* 5-Minute / Low Motivation Session Modal */}
+      {sessionModalOpen && activeSession && (
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-slate-900 border border-indigo-500/40 rounded-3xl p-6 max-w-sm w-full space-y-4 shadow-2xl">
+            <div className="flex items-center justify-between">
+              <div>
+                <span className="text-[10px] uppercase font-bold tracking-wider text-indigo-400">
+                  {sessionMode === 'low-motivation' ? '🌱 Low Motivation Mode' : '⏱️ 5-Minute Session'}
+                </span>
+                <h3 className="text-lg font-bold text-white">Your Targeted Session</h3>
+              </div>
+              <button
+                onClick={() => setSessionModalOpen(false)}
+                className="text-slate-400 hover:text-white text-sm p-1"
+              >
+                ✕
+              </button>
+            </div>
+
+            <p className="text-xs text-slate-400">
+              {sessionMode === 'low-motivation'
+                ? 'Minimalism: Just 1 single card to maintain your daily streak without cognitive fatigue.'
+                : 'Balanced interleaving of due reviews and newly unlocked concepts.'}
+            </p>
+
+            {/* Session Items Playlist */}
+            <div className="space-y-2">
+              {activeSession.conceptIds.map((cId, idx) => {
+                const concept = curriculum.concepts.find((c) => c.id === cId);
+                const isReview = activeSession.dueReviews.includes(cId);
+
+                return (
+                  <div
+                    key={cId}
+                    className="p-3 rounded-2xl bg-slate-950/80 border border-slate-800 flex items-center justify-between gap-3"
+                  >
+                    <div className="flex items-center gap-2.5 min-w-0">
+                      <span className="w-5 h-5 rounded-full bg-slate-800 text-slate-300 font-mono text-[10px] flex items-center justify-center flex-shrink-0">
+                        {idx + 1}
+                      </span>
+                      <div className="min-w-0">
+                        <div className="text-xs font-bold text-white truncate">
+                          {concept?.title ?? cId}
+                        </div>
+                        <div className="text-[10px] text-slate-400">
+                          {isReview ? '🔁 Spaced Review' : '✨ New Learning'}
+                        </div>
+                      </div>
+                    </div>
+
+                    <Link
+                      href={isReview ? `/quiz/${cId}` : `/lesson/${cId}`}
+                      onClick={() => setSessionModalOpen(false)}
+                      className="px-3 py-1.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs whitespace-nowrap shadow-md shadow-indigo-600/20"
+                    >
+                      Start →
+                    </Link>
+                  </div>
+                );
+              })}
+            </div>
+
+            <button
+              onClick={() => setSessionModalOpen(false)}
+              className="w-full py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Variable Reward Surprise Bonus Card Modal (Task 9.8) */}
+      {bonusChallengeOpen && (
+        <div className="fixed inset-0 bg-black/85 backdrop-blur-md z-50 flex items-center justify-center p-4">
+          <div className="bg-gradient-to-b from-indigo-950 via-slate-900 to-slate-900 border-2 border-amber-400/80 rounded-3xl p-6 max-w-sm w-full text-center space-y-4 shadow-2xl relative overflow-hidden">
+            <div className="text-4xl animate-bounce">🎁</div>
+            <div>
+              <span className="text-[10px] font-bold uppercase tracking-wider text-amber-300 bg-amber-950/60 px-2 py-0.5 rounded-full border border-amber-500/40">
+                Surprise Bonus Reward!
+              </span>
+              <h3 className="text-xl font-black text-white mt-2">
+                Lucky Scholar Drop
+              </h3>
+              <p className="text-xs text-slate-300 mt-1 leading-relaxed">
+                You triggered a 20% variable reward bonus! Claim instant bonus XP to level up your mastery ranking.
+              </p>
+            </div>
+
+            <div className="py-3 px-4 bg-slate-950/80 rounded-2xl border border-slate-800">
+              <div className="text-2xl font-black text-amber-400">+50 Bonus XP</div>
+            </div>
+
+            <button
+              onClick={handleClaimBonusXP}
+              disabled={bonusClaimed}
+              className={`w-full py-3 rounded-xl font-bold text-sm shadow-xl transition-all ${
+                bonusClaimed
+                  ? 'bg-emerald-600 text-white'
+                  : 'bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950'
+              }`}
+            >
+              {bonusClaimed ? 'Claimed! ✓' : 'Claim Bonus XP ⚡'}
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

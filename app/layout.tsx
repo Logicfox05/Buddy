@@ -25,6 +25,8 @@ export const viewport: Viewport = {
   viewportFit: 'cover',
 };
 
+import { NetworkStatusBanner } from '@/components/common/NetworkStatusBanner';
+
 export default function RootLayout({
   children,
 }: {
@@ -39,7 +41,8 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="apple-mobile-web-app-title" content="Buddy" />
       </head>
-      <body className="safe-bottom">
+      <body className="safe-bottom bg-slate-950 text-white min-h-screen">
+        <NetworkStatusBanner />
         <main className="min-h-dvh max-w-lg mx-auto">
           {children}
         </main>

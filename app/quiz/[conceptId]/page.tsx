@@ -12,6 +12,7 @@ import {
   XP_FOR_MASTERY,
 } from '@/domain/mastery/MasteryStateMachine';
 import { createCard } from '@/domain/scheduler/SchedulerService';
+import { evaluateExplanationRubric } from '@/lib/assessment/rubric';
 
 interface QuestionItem {
   id: string;
@@ -48,6 +49,8 @@ export default function QuizRunnerPage() {
     score: number;
     maxScore: number;
     message: string;
+    matchedCriteria?: string[];
+    missingCriteria?: string[];
   } | null>(null);
 
   // Results aggregation
@@ -148,25 +151,43 @@ export default function QuizRunnerPage() {
         ? 'All correct options selected!'
         : 'Some options were missed or incorrectly included.';
     } else if (currentQ.type === 'explain-it') {
-      // Provisional keyword/rubric heuristic (amendment 4)
       const rubric = currentQ.rubric ?? [];
-      const userWords = explainText.toLowerCase();
-      let matchedPoints = 0;
+      const rubricResult = evaluateExplanationRubric(explainText, rubric);
+      isCorrect = rubricResult.passed;
+      score = rubricResult.score;
+      message = rubricResult.feedback;
 
-      for (const criterion of rubric) {
-        const keywords = criterion
-          .toLowerCase()
-          .split(/[\s,–—()]+/)
-          .filter((w) => w.length > 4);
-        const matchCount = keywords.filter((kw) => userWords.includes(kw)).length;
-        if (matchCount >= 1 || userWords.length > 60) {
-          matchedPoints++;
-        }
-      }
-      matchedPoints = Math.min(rubric.length, Math.max(1, matchedPoints));
-      isCorrect = matchedPoints >= 2;
-      score = matchedPoints;
-      message = `Provisional Score: ${matchedPoints}/${rubric.length} rubric criteria matched.`;
+      setFeedback({
+        correct: isCorrect,
+        score,
+        maxScore: rubricResult.maxScore,
+        message,
+        matchedCriteria: rubricResult.matchedCriteria,
+        missingCriteria: rubricResult.missingCriteria,
+      });
+      setSubmitted(true);
+
+      const newScoreItem = {
+        questionId: currentQ.id,
+        type: currentQ.type,
+        correct: isCorrect,
+        score,
+        maxScore: rubricResult.maxScore,
+      };
+      const updatedScores = [...scores, newScoreItem];
+      setScores(updatedScores);
+
+      await db.assessmentAttempts.add({
+        conceptId,
+        questionId: currentQ.id,
+        questionType: currentQ.type,
+        subtopic: currentQ.subtopic,
+        correct: isCorrect,
+        score,
+        maxScore: rubricResult.maxScore,
+        attemptedAt: new Date().toISOString(),
+      });
+      return;
     }
 
     setFeedback({
@@ -397,9 +418,16 @@ export default function QuizRunnerPage() {
 
               {currentQ.type === 'explain-it' && (
                 <div className="space-y-3">
-                  <div className="text-xs text-amber-400/90 bg-amber-950/30 border border-amber-800/40 p-2.5 rounded-xl flex items-center gap-2">
-                    <span>⚠️</span>
-                    <span>Provisional keyword rubric grading (Amendment 4). Express your explanation in your own words.</span>
+                  <div className="text-xs text-amber-400/90 bg-amber-950/30 border border-amber-800/40 p-2.5 rounded-xl flex items-center justify-between">
+                    <span className="flex items-center gap-2">
+                      <span>⚠️</span>
+                      <span>Express in your own words. Minimum 50 characters required for evaluation.</span>
+                    </span>
+                    <span className={`font-mono text-xs font-bold px-2 py-0.5 rounded ${
+                      explainText.trim().length >= 50 ? 'bg-emerald-900/60 text-emerald-300' : 'bg-slate-800 text-slate-400'
+                    }`}>
+                      {explainText.trim().length}/50
+                    </span>
                   </div>
                   <textarea
                     rows={5}
@@ -426,6 +454,26 @@ export default function QuizRunnerPage() {
                   <span>{feedback.correct ? '✅' : '❌'}</span>
                   <span>{feedback.message}</span>
                 </div>
+                {feedback.matchedCriteria && feedback.matchedCriteria.length > 0 && (
+                  <div className="mt-2 text-xs">
+                    <span className="text-emerald-400 font-semibold">Matched criteria:</span>
+                    <ul className="list-disc pl-4 mt-1 space-y-0.5 text-emerald-300/90">
+                      {feedback.matchedCriteria.map((c, i) => (
+                        <li key={i}>{c}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+                {feedback.missingCriteria && feedback.missingCriteria.length > 0 && (
+                  <div className="mt-2 text-xs">
+                    <span className="text-amber-400 font-semibold">To improve, consider mentioning:</span>
+                    <ul className="list-disc pl-4 mt-1 space-y-0.5 text-amber-300/90">
+                      {feedback.missingCriteria.map((c, i) => (
+                        <li key={i}>{c}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
                 {currentQ.explanation && (
                   <p className="text-xs mt-2 text-slate-300 leading-relaxed border-t border-slate-800/60 pt-2">
                     <strong className="text-white">Explanation: </strong>
