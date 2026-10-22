@@ -10,7 +10,9 @@ export type Domain =
   | 'discrete-math'
   | 'oop-design'
   | 'system-design'
-  | 'security';
+  | 'security'
+  | 'aptitude'
+  | 'hr-behavioral';
 
 export type BloomLevel =
   | 'remember'

@@ -161,7 +161,7 @@ export default function KnowledgeMapPage() {
           ],
         },
       ];
-    } else {
+    } else if (selectedDomain === 'os') {
       return [
         {
           id: 'processes',
@@ -200,8 +200,17 @@ export default function KnowledgeMapPage() {
           conceptIds: ['os.security.protection', 'os.boot.sequence'],
         },
       ];
+    } else {
+      const matchConcepts = curriculum?.concepts.filter((c) => c.domain === selectedDomain) || [];
+      return [
+        {
+          id: `${selectedDomain}-stage`,
+          title: `${selectedDomain.toUpperCase()} Mastery Track`,
+          conceptIds: matchConcepts.map((c) => c.id),
+        },
+      ];
     }
-  }, [selectedDomain]);
+  }, [curriculum, selectedDomain]);
 
   if (loading || !curriculum) {
     return (
@@ -243,27 +252,39 @@ export default function KnowledgeMapPage() {
         </div>
 
         {/* Domain Selector Tabs */}
-        <div className="grid grid-cols-2 gap-2 mt-5 p-1 bg-slate-900/80 rounded-xl border border-slate-800">
-          <button
-            onClick={() => setSelectedDomain('dsa')}
-            className={`py-2.5 px-4 rounded-lg font-semibold text-sm transition-all flex items-center justify-center gap-2 ${
-              selectedDomain === 'dsa'
-                ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/30'
-                : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
-            }`}
-          >
-            <span>🧩</span> Algorithms & Data (15)
-          </button>
-          <button
-            onClick={() => setSelectedDomain('os')}
-            className={`py-2.5 px-4 rounded-lg font-semibold text-sm transition-all flex items-center justify-center gap-2 ${
-              selectedDomain === 'os'
-                ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/30'
-                : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
-            }`}
-          >
-            <span>⚙️</span> Operating Systems (15)
-          </button>
+        <div className="flex gap-1.5 overflow-x-auto no-scrollbar mt-5 p-1 bg-slate-900/80 rounded-xl border border-slate-800">
+          {curriculum.domains.map((dom) => {
+            const count = curriculum.concepts.filter((c) => c.domain === dom.id).length;
+            const isSelected = selectedDomain === dom.id;
+            const emoji =
+              dom.id === 'dsa'
+                ? '🧩'
+                : dom.id === 'os'
+                ? '⚙️'
+                : dom.id === 'dbms'
+                ? '🗄️'
+                : dom.id === 'networks'
+                ? '🌐'
+                : dom.id === 'oop-design'
+                ? '🏗️'
+                : dom.id === 'aptitude'
+                ? '🧠'
+                : '🤝';
+
+            return (
+              <button
+                key={dom.id}
+                onClick={() => setSelectedDomain(dom.id)}
+                className={`py-2 px-3 rounded-lg font-semibold text-xs whitespace-nowrap transition-all flex items-center gap-1.5 shrink-0 ${
+                  isSelected
+                    ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/30'
+                    : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
+                }`}
+              >
+                <span>{emoji}</span> {dom.name} ({count})
+              </button>
+            );
+          })}
         </div>
 
         {/* Search */}

@@ -33,7 +33,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="manifest" href="/manifest.json" />
         <link rel="apple-touch-icon" href="/icon-192x192.png" />
@@ -41,7 +41,7 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="apple-mobile-web-app-title" content="Buddy" />
       </head>
-      <body className="safe-bottom bg-slate-950 text-white min-h-screen">
+      <body className="safe-bottom bg-slate-950 text-white min-h-screen" suppressHydrationWarning>
         <NetworkStatusBanner />
         <main className="min-h-dvh max-w-lg mx-auto">
           {children}

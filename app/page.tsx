@@ -211,6 +211,40 @@ export default function HomePage() {
 
       {/* Main Focus CTAs */}
       <div className="space-y-3">
+        {/* 3-Phase Placement Drive Card */}
+        <div className="bg-gradient-to-r from-indigo-950/80 via-purple-950/50 to-slate-900 border border-indigo-700/60 rounded-3xl p-5 shadow-xl space-y-3 relative overflow-hidden">
+          <div className="flex items-center justify-between">
+            <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-indigo-900/60 text-indigo-300 border border-indigo-700/50 flex items-center gap-1">
+              <span>🎯</span> 3-Phase Placement Simulator
+            </span>
+            <span className="text-[10px] text-emerald-400 font-semibold bg-emerald-950/70 border border-emerald-800/80 px-2 py-0.5 rounded">
+              Ready to Practice
+            </span>
+          </div>
+
+          <div>
+            <h2 className="text-base font-bold text-white">Full Campus Interview Drive</h2>
+            <p className="text-xs text-slate-300 mt-1">
+              Test all 3 hiring stages: <strong>Aptitude</strong> (Quant & Logic), <strong>Technical Round</strong> (Core B.Tech OS, DBMS, Networks, OOPs), and <strong>HR Behavioral</strong> (STAR method).
+            </p>
+          </div>
+
+          <div className="flex gap-2">
+            <Link
+              href="/interview"
+              className="flex-1 py-2.5 px-3 rounded-xl font-bold text-xs bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white text-center shadow-lg shadow-indigo-600/30 transition-all active:scale-[0.99]"
+            >
+              🚀 3-Phase Placement Drive →
+            </Link>
+            <Link
+              href="/explore"
+              className="py-2.5 px-3.5 rounded-xl font-bold text-xs bg-emerald-600 hover:bg-emerald-500 text-white text-center shadow-lg shadow-emerald-600/30 transition-all active:scale-[0.99] flex items-center gap-1"
+            >
+              <span>🌐</span> Web Tutor
+            </Link>
+          </div>
+        </div>
+
         {/* Next Concept Card */}
         {nextToLearn && (
           <div className="bg-slate-900 border border-slate-800 rounded-3xl p-5 shadow-xl space-y-3">

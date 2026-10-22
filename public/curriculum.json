@@ -42,6 +42,52 @@
         "os.security.protection",
         "os.boot.sequence"
       ]
+    },
+    {
+      "id": "dbms",
+      "name": "Database Management Systems",
+      "concepts": [
+        "dbms.relational.basics",
+        "dbms.normalization",
+        "dbms.transactions.acid",
+        "dbms.indexing.btrees"
+      ]
+    },
+    {
+      "id": "networks",
+      "name": "Computer Networks",
+      "concepts": [
+        "networks.osi.tcpip",
+        "networks.transport.tcp-udp",
+        "networks.ip.addressing",
+        "networks.app.http-dns"
+      ]
+    },
+    {
+      "id": "oop-design",
+      "name": "OOP & System Design",
+      "concepts": [
+        "oop.pillars.basics",
+        "oop.solid.principles",
+        "oop.patterns.gang-of-four",
+        "oop.system.scalability"
+      ]
+    },
+    {
+      "id": "aptitude",
+      "name": "Aptitude & Reasoning",
+      "concepts": [
+        "apt.quant.foundations",
+        "apt.logical.reasoning"
+      ]
+    },
+    {
+      "id": "hr-behavioral",
+      "name": "HR & Behavioral Round",
+      "concepts": [
+        "hr.star.framework",
+        "hr.situational.mastery"
+      ]
     }
   ],
   "concepts": [
@@ -51,10 +97,22 @@
       "domain": "dsa",
       "prerequisites": [],
       "learningObjectives": [
-        { "description": "Define Big-O, Big-Ω, and Big-Θ notation", "bloomLevel": "remember" },
-        { "description": "Explain why constant factors are dropped in asymptotic analysis", "bloomLevel": "understand" },
-        { "description": "Analyze the time and space complexity of simple loops and recursive functions", "bloomLevel": "analyze" },
-        { "description": "Compare algorithms by their asymptotic growth rates", "bloomLevel": "evaluate" }
+        {
+          "description": "Define Big-O, Big-Ω, and Big-Θ notation",
+          "bloomLevel": "remember"
+        },
+        {
+          "description": "Explain why constant factors are dropped in asymptotic analysis",
+          "bloomLevel": "understand"
+        },
+        {
+          "description": "Analyze the time and space complexity of simple loops and recursive functions",
+          "bloomLevel": "analyze"
+        },
+        {
+          "description": "Compare algorithms by their asymptotic growth rates",
+          "bloomLevel": "evaluate"
+        }
       ],
       "resources": [
         {
@@ -107,21 +165,42 @@
         }
       ],
       "assessments": {
-        "quiz": ["big-o-q1", "big-o-q2", "big-o-q3"],
-        "explanation": ["big-o-e1"],
-        "applied": ["big-o-a1"],
-        "coding": ["big-o-c1"]
+        "quiz": [
+          "big-o-q1",
+          "big-o-q2",
+          "big-o-q3"
+        ],
+        "explanation": [
+          "big-o-e1"
+        ],
+        "applied": [
+          "big-o-a1"
+        ],
+        "coding": [
+          "big-o-c1"
+        ]
       }
     },
     {
       "id": "dsa.array.basics",
       "title": "Arrays & Memory Layout",
       "domain": "dsa",
-      "prerequisites": ["dsa.complexity.big-o"],
+      "prerequisites": [
+        "dsa.complexity.big-o"
+      ],
       "learningObjectives": [
-        { "description": "Describe how arrays are stored in contiguous memory", "bloomLevel": "understand" },
-        { "description": "Calculate address of an element using index arithmetic", "bloomLevel": "apply" },
-        { "description": "Compare dynamic vs. static arrays for insertion/deletion", "bloomLevel": "analyze" }
+        {
+          "description": "Describe how arrays are stored in contiguous memory",
+          "bloomLevel": "understand"
+        },
+        {
+          "description": "Calculate address of an element using index arithmetic",
+          "bloomLevel": "apply"
+        },
+        {
+          "description": "Compare dynamic vs. static arrays for insertion/deletion",
+          "bloomLevel": "analyze"
+        }
       ],
       "resources": [
         {
@@ -157,20 +236,37 @@
         }
       ],
       "assessments": {
-        "quiz": ["array-basics-q1", "array-basics-q2"],
-        "explanation": ["array-basics-e1"],
-        "applied": ["array-basics-a1"],
-        "coding": ["array-basics-c1"]
+        "quiz": [
+          "array-basics-q1",
+          "array-basics-q2"
+        ],
+        "explanation": [
+          "array-basics-e1"
+        ],
+        "applied": [
+          "array-basics-a1"
+        ],
+        "coding": [
+          "array-basics-c1"
+        ]
       }
     },
     {
       "id": "dsa.array.two-pointers",
       "title": "Two-Pointer Technique",
       "domain": "dsa",
-      "prerequisites": ["dsa.array.basics"],
+      "prerequisites": [
+        "dsa.array.basics"
+      ],
       "learningObjectives": [
-        { "description": "Explain the two-pointer pattern and when to apply it", "bloomLevel": "understand" },
-        { "description": "Apply two-pointer to solve pair-sum and palindrome problems", "bloomLevel": "apply" }
+        {
+          "description": "Explain the two-pointer pattern and when to apply it",
+          "bloomLevel": "understand"
+        },
+        {
+          "description": "Apply two-pointer to solve pair-sum and palindrome problems",
+          "bloomLevel": "apply"
+        }
       ],
       "resources": [
         {
@@ -194,20 +290,37 @@
         }
       ],
       "assessments": {
-        "quiz": ["two-ptr-q1", "two-ptr-q2"],
-        "explanation": ["two-ptr-e1"],
-        "applied": ["two-ptr-a1"],
-        "coding": ["two-ptr-c1"]
+        "quiz": [
+          "two-ptr-q1",
+          "two-ptr-q2"
+        ],
+        "explanation": [
+          "two-ptr-e1"
+        ],
+        "applied": [
+          "two-ptr-a1"
+        ],
+        "coding": [
+          "two-ptr-c1"
+        ]
       }
     },
     {
       "id": "dsa.array.sliding-window",
       "title": "Sliding Window",
       "domain": "dsa",
-      "prerequisites": ["dsa.array.two-pointers"],
+      "prerequisites": [
+        "dsa.array.two-pointers"
+      ],
       "learningObjectives": [
-        { "description": "Explain the fixed and variable sliding window patterns", "bloomLevel": "understand" },
-        { "description": "Apply sliding window to subarray-sum and substring problems", "bloomLevel": "apply" }
+        {
+          "description": "Explain the fixed and variable sliding window patterns",
+          "bloomLevel": "understand"
+        },
+        {
+          "description": "Apply sliding window to subarray-sum and substring problems",
+          "bloomLevel": "apply"
+        }
       ],
       "resources": [
         {
@@ -231,20 +344,37 @@
         }
       ],
       "assessments": {
-        "quiz": ["sw-q1", "sw-q2"],
-        "explanation": ["sw-e1"],
-        "applied": ["sw-a1"],
-        "coding": ["sw-c1"]
+        "quiz": [
+          "sw-q1",
+          "sw-q2"
+        ],
+        "explanation": [
+          "sw-e1"
+        ],
+        "applied": [
+          "sw-a1"
+        ],
+        "coding": [
+          "sw-c1"
+        ]
       }
     },
     {
       "id": "dsa.linkedlist.singly",
       "title": "Singly Linked Lists",
       "domain": "dsa",
-      "prerequisites": ["dsa.array.basics"],
+      "prerequisites": [
+        "dsa.array.basics"
+      ],
       "learningObjectives": [
-        { "description": "Implement node insertion, deletion, and traversal", "bloomLevel": "apply" },
-        { "description": "Compare linked list vs. array trade-offs", "bloomLevel": "analyze" }
+        {
+          "description": "Implement node insertion, deletion, and traversal",
+          "bloomLevel": "apply"
+        },
+        {
+          "description": "Compare linked list vs. array trade-offs",
+          "bloomLevel": "analyze"
+        }
       ],
       "resources": [
         {
@@ -268,20 +398,37 @@
         }
       ],
       "assessments": {
-        "quiz": ["sll-q1", "sll-q2"],
-        "explanation": ["sll-e1"],
-        "applied": ["sll-a1"],
-        "coding": ["sll-c1"]
+        "quiz": [
+          "sll-q1",
+          "sll-q2"
+        ],
+        "explanation": [
+          "sll-e1"
+        ],
+        "applied": [
+          "sll-a1"
+        ],
+        "coding": [
+          "sll-c1"
+        ]
       }
     },
     {
       "id": "dsa.linkedlist.doubly",
       "title": "Doubly Linked Lists",
       "domain": "dsa",
-      "prerequisites": ["dsa.linkedlist.singly"],
+      "prerequisites": [
+        "dsa.linkedlist.singly"
+      ],
       "learningObjectives": [
-        { "description": "Explain the prev pointer and its trade-offs", "bloomLevel": "understand" },
-        { "description": "Implement O(1) deletion given a node reference", "bloomLevel": "apply" }
+        {
+          "description": "Explain the prev pointer and its trade-offs",
+          "bloomLevel": "understand"
+        },
+        {
+          "description": "Implement O(1) deletion given a node reference",
+          "bloomLevel": "apply"
+        }
       ],
       "resources": [
         {
@@ -300,20 +447,36 @@
         }
       ],
       "assessments": {
-        "quiz": ["dll-q1"],
-        "explanation": ["dll-e1"],
-        "applied": ["dll-a1"],
-        "coding": ["dll-c1"]
+        "quiz": [
+          "dll-q1"
+        ],
+        "explanation": [
+          "dll-e1"
+        ],
+        "applied": [
+          "dll-a1"
+        ],
+        "coding": [
+          "dll-c1"
+        ]
       }
     },
     {
       "id": "dsa.stack.basics",
       "title": "Stacks (LIFO)",
       "domain": "dsa",
-      "prerequisites": ["dsa.array.basics"],
+      "prerequisites": [
+        "dsa.array.basics"
+      ],
       "learningObjectives": [
-        { "description": "Describe LIFO semantics and stack operations", "bloomLevel": "remember" },
-        { "description": "Apply a stack to bracket matching and function call simulation", "bloomLevel": "apply" }
+        {
+          "description": "Describe LIFO semantics and stack operations",
+          "bloomLevel": "remember"
+        },
+        {
+          "description": "Apply a stack to bracket matching and function call simulation",
+          "bloomLevel": "apply"
+        }
       ],
       "resources": [
         {
@@ -337,20 +500,37 @@
         }
       ],
       "assessments": {
-        "quiz": ["stack-q1", "stack-q2"],
-        "explanation": ["stack-e1"],
-        "applied": ["stack-a1"],
-        "coding": ["stack-c1"]
+        "quiz": [
+          "stack-q1",
+          "stack-q2"
+        ],
+        "explanation": [
+          "stack-e1"
+        ],
+        "applied": [
+          "stack-a1"
+        ],
+        "coding": [
+          "stack-c1"
+        ]
       }
     },
     {
       "id": "dsa.queue.basics",
       "title": "Queues & Deques (FIFO)",
       "domain": "dsa",
-      "prerequisites": ["dsa.linkedlist.singly"],
+      "prerequisites": [
+        "dsa.linkedlist.singly"
+      ],
       "learningObjectives": [
-        { "description": "Describe FIFO semantics and queue/deque operations", "bloomLevel": "remember" },
-        { "description": "Implement a queue using two stacks", "bloomLevel": "apply" }
+        {
+          "description": "Describe FIFO semantics and queue/deque operations",
+          "bloomLevel": "remember"
+        },
+        {
+          "description": "Implement a queue using two stacks",
+          "bloomLevel": "apply"
+        }
       ],
       "resources": [
         {
@@ -369,21 +549,41 @@
         }
       ],
       "assessments": {
-        "quiz": ["queue-q1"],
-        "explanation": ["queue-e1"],
-        "applied": ["queue-a1"],
-        "coding": ["queue-c1"]
+        "quiz": [
+          "queue-q1"
+        ],
+        "explanation": [
+          "queue-e1"
+        ],
+        "applied": [
+          "queue-a1"
+        ],
+        "coding": [
+          "queue-c1"
+        ]
       }
     },
     {
       "id": "dsa.tree.binary",
       "title": "Binary Trees & Traversals",
       "domain": "dsa",
-      "prerequisites": ["dsa.queue.basics", "dsa.stack.basics"],
+      "prerequisites": [
+        "dsa.queue.basics",
+        "dsa.stack.basics"
+      ],
       "learningObjectives": [
-        { "description": "Define binary tree, height, and balance", "bloomLevel": "remember" },
-        { "description": "Implement preorder, inorder, postorder, and BFS traversals", "bloomLevel": "apply" },
-        { "description": "Analyze the time complexity of tree traversals", "bloomLevel": "analyze" }
+        {
+          "description": "Define binary tree, height, and balance",
+          "bloomLevel": "remember"
+        },
+        {
+          "description": "Implement preorder, inorder, postorder, and BFS traversals",
+          "bloomLevel": "apply"
+        },
+        {
+          "description": "Analyze the time complexity of tree traversals",
+          "bloomLevel": "analyze"
+        }
       ],
       "resources": [
         {
@@ -412,21 +612,42 @@
         }
       ],
       "assessments": {
-        "quiz": ["tree-q1", "tree-q2", "tree-q3"],
-        "explanation": ["tree-e1"],
-        "applied": ["tree-a1"],
-        "coding": ["tree-c1"]
+        "quiz": [
+          "tree-q1",
+          "tree-q2",
+          "tree-q3"
+        ],
+        "explanation": [
+          "tree-e1"
+        ],
+        "applied": [
+          "tree-a1"
+        ],
+        "coding": [
+          "tree-c1"
+        ]
       }
     },
     {
       "id": "dsa.tree.bst",
       "title": "Binary Search Trees",
       "domain": "dsa",
-      "prerequisites": ["dsa.tree.binary"],
+      "prerequisites": [
+        "dsa.tree.binary"
+      ],
       "learningObjectives": [
-        { "description": "State the BST property and why inorder traversal gives sorted output", "bloomLevel": "understand" },
-        { "description": "Implement search, insert, and delete in a BST", "bloomLevel": "apply" },
-        { "description": "Explain degeneration and why balanced BSTs (AVL/Red-Black) exist", "bloomLevel": "analyze" }
+        {
+          "description": "State the BST property and why inorder traversal gives sorted output",
+          "bloomLevel": "understand"
+        },
+        {
+          "description": "Implement search, insert, and delete in a BST",
+          "bloomLevel": "apply"
+        },
+        {
+          "description": "Explain degeneration and why balanced BSTs (AVL/Red-Black) exist",
+          "bloomLevel": "analyze"
+        }
       ],
       "resources": [
         {
@@ -445,21 +666,41 @@
         }
       ],
       "assessments": {
-        "quiz": ["bst-q1", "bst-q2"],
-        "explanation": ["bst-e1"],
-        "applied": ["bst-a1"],
-        "coding": ["bst-c1"]
+        "quiz": [
+          "bst-q1",
+          "bst-q2"
+        ],
+        "explanation": [
+          "bst-e1"
+        ],
+        "applied": [
+          "bst-a1"
+        ],
+        "coding": [
+          "bst-c1"
+        ]
       }
     },
     {
       "id": "dsa.heap.basics",
       "title": "Heaps & Priority Queues",
       "domain": "dsa",
-      "prerequisites": ["dsa.tree.binary"],
+      "prerequisites": [
+        "dsa.tree.binary"
+      ],
       "learningObjectives": [
-        { "description": "Explain the heap property and array representation of heaps", "bloomLevel": "understand" },
-        { "description": "Trace heapify-up and heapify-down operations", "bloomLevel": "apply" },
-        { "description": "Justify why heap operations are O(log n)", "bloomLevel": "analyze" }
+        {
+          "description": "Explain the heap property and array representation of heaps",
+          "bloomLevel": "understand"
+        },
+        {
+          "description": "Trace heapify-up and heapify-down operations",
+          "bloomLevel": "apply"
+        },
+        {
+          "description": "Justify why heap operations are O(log n)",
+          "bloomLevel": "analyze"
+        }
       ],
       "resources": [
         {
@@ -483,21 +724,41 @@
         }
       ],
       "assessments": {
-        "quiz": ["heap-q1", "heap-q2"],
-        "explanation": ["heap-e1"],
-        "applied": ["heap-a1"],
-        "coding": ["heap-c1"]
+        "quiz": [
+          "heap-q1",
+          "heap-q2"
+        ],
+        "explanation": [
+          "heap-e1"
+        ],
+        "applied": [
+          "heap-a1"
+        ],
+        "coding": [
+          "heap-c1"
+        ]
       }
     },
     {
       "id": "dsa.hash.basics",
       "title": "Hash Tables & Collision Handling",
       "domain": "dsa",
-      "prerequisites": ["dsa.array.basics"],
+      "prerequisites": [
+        "dsa.array.basics"
+      ],
       "learningObjectives": [
-        { "description": "Explain how a hash function maps keys to buckets", "bloomLevel": "understand" },
-        { "description": "Compare chaining and open addressing for collision resolution", "bloomLevel": "analyze" },
-        { "description": "Justify why average-case operations are O(1)", "bloomLevel": "evaluate" }
+        {
+          "description": "Explain how a hash function maps keys to buckets",
+          "bloomLevel": "understand"
+        },
+        {
+          "description": "Compare chaining and open addressing for collision resolution",
+          "bloomLevel": "analyze"
+        },
+        {
+          "description": "Justify why average-case operations are O(1)",
+          "bloomLevel": "evaluate"
+        }
       ],
       "resources": [
         {
@@ -521,20 +782,38 @@
         }
       ],
       "assessments": {
-        "quiz": ["hash-q1", "hash-q2"],
-        "explanation": ["hash-e1"],
-        "applied": ["hash-a1"],
-        "coding": ["hash-c1"]
+        "quiz": [
+          "hash-q1",
+          "hash-q2"
+        ],
+        "explanation": [
+          "hash-e1"
+        ],
+        "applied": [
+          "hash-a1"
+        ],
+        "coding": [
+          "hash-c1"
+        ]
       }
     },
     {
       "id": "dsa.graph.representation",
       "title": "Graph Representation",
       "domain": "dsa",
-      "prerequisites": ["dsa.hash.basics", "dsa.linkedlist.singly"],
+      "prerequisites": [
+        "dsa.hash.basics",
+        "dsa.linkedlist.singly"
+      ],
       "learningObjectives": [
-        { "description": "Represent a graph as adjacency list and adjacency matrix", "bloomLevel": "apply" },
-        { "description": "Compare space and time trade-offs of each representation", "bloomLevel": "analyze" }
+        {
+          "description": "Represent a graph as adjacency list and adjacency matrix",
+          "bloomLevel": "apply"
+        },
+        {
+          "description": "Compare space and time trade-offs of each representation",
+          "bloomLevel": "analyze"
+        }
       ],
       "resources": [
         {
@@ -558,20 +837,37 @@
         }
       ],
       "assessments": {
-        "quiz": ["graph-rep-q1", "graph-rep-q2"],
-        "explanation": ["graph-rep-e1"],
-        "applied": ["graph-rep-a1"],
-        "coding": ["graph-rep-c1"]
+        "quiz": [
+          "graph-rep-q1",
+          "graph-rep-q2"
+        ],
+        "explanation": [
+          "graph-rep-e1"
+        ],
+        "applied": [
+          "graph-rep-a1"
+        ],
+        "coding": [
+          "graph-rep-c1"
+        ]
       }
     },
     {
       "id": "dsa.graph.bfs-dfs",
       "title": "Graph BFS & DFS",
       "domain": "dsa",
-      "prerequisites": ["dsa.graph.representation"],
+      "prerequisites": [
+        "dsa.graph.representation"
+      ],
       "learningObjectives": [
-        { "description": "Implement BFS and DFS on a graph iteratively and recursively", "bloomLevel": "apply" },
-        { "description": "Identify which traversal to use for shortest-path vs. connectivity problems", "bloomLevel": "analyze" }
+        {
+          "description": "Implement BFS and DFS on a graph iteratively and recursively",
+          "bloomLevel": "apply"
+        },
+        {
+          "description": "Identify which traversal to use for shortest-path vs. connectivity problems",
+          "bloomLevel": "analyze"
+        }
       ],
       "resources": [
         {
@@ -595,21 +891,42 @@
         }
       ],
       "assessments": {
-        "quiz": ["bfs-dfs-q1", "bfs-dfs-q2"],
-        "explanation": ["bfs-dfs-e1"],
-        "applied": ["bfs-dfs-a1"],
-        "coding": ["bfs-dfs-c1"]
+        "quiz": [
+          "bfs-dfs-q1",
+          "bfs-dfs-q2"
+        ],
+        "explanation": [
+          "bfs-dfs-e1"
+        ],
+        "applied": [
+          "bfs-dfs-a1"
+        ],
+        "coding": [
+          "bfs-dfs-c1"
+        ]
       }
     },
     {
       "id": "dsa.sorting.comparison",
       "title": "Comparison-Based Sorting",
       "domain": "dsa",
-      "prerequisites": ["dsa.complexity.big-o", "dsa.tree.binary"],
+      "prerequisites": [
+        "dsa.complexity.big-o",
+        "dsa.tree.binary"
+      ],
       "learningObjectives": [
-        { "description": "Implement merge sort and quicksort", "bloomLevel": "apply" },
-        { "description": "Explain the Ω(n log n) lower bound for comparison sorting", "bloomLevel": "understand" },
-        { "description": "Analyze average and worst-case performance of quicksort", "bloomLevel": "analyze" }
+        {
+          "description": "Implement merge sort and quicksort",
+          "bloomLevel": "apply"
+        },
+        {
+          "description": "Explain the Ω(n log n) lower bound for comparison sorting",
+          "bloomLevel": "understand"
+        },
+        {
+          "description": "Analyze average and worst-case performance of quicksort",
+          "bloomLevel": "analyze"
+        }
       ],
       "resources": [
         {
@@ -638,10 +955,20 @@
         }
       ],
       "assessments": {
-        "quiz": ["sort-q1", "sort-q2", "sort-q3"],
-        "explanation": ["sort-e1"],
-        "applied": ["sort-a1"],
-        "coding": ["sort-c1"]
+        "quiz": [
+          "sort-q1",
+          "sort-q2",
+          "sort-q3"
+        ],
+        "explanation": [
+          "sort-e1"
+        ],
+        "applied": [
+          "sort-a1"
+        ],
+        "coding": [
+          "sort-c1"
+        ]
       }
     },
     {
@@ -650,9 +977,18 @@
       "domain": "os",
       "prerequisites": [],
       "learningObjectives": [
-        { "description": "Define a process and distinguish it from a program", "bloomLevel": "understand" },
-        { "description": "List the fields of a Process Control Block", "bloomLevel": "remember" },
-        { "description": "Trace process state transitions", "bloomLevel": "apply" }
+        {
+          "description": "Define a process and distinguish it from a program",
+          "bloomLevel": "understand"
+        },
+        {
+          "description": "List the fields of a Process Control Block",
+          "bloomLevel": "remember"
+        },
+        {
+          "description": "Trace process state transitions",
+          "bloomLevel": "apply"
+        }
       ],
       "resources": [
         {
@@ -681,20 +1017,38 @@
         }
       ],
       "assessments": {
-        "quiz": ["proc-q1", "proc-q2", "proc-q3"],
-        "explanation": ["proc-e1"],
-        "applied": ["proc-a1"],
-        "coding": ["proc-c1"]
+        "quiz": [
+          "proc-q1",
+          "proc-q2",
+          "proc-q3"
+        ],
+        "explanation": [
+          "proc-e1"
+        ],
+        "applied": [
+          "proc-a1"
+        ],
+        "coding": [
+          "proc-c1"
+        ]
       }
     },
     {
       "id": "os.process.scheduling",
       "title": "CPU Scheduling Algorithms",
       "domain": "os",
-      "prerequisites": ["os.process.basics"],
+      "prerequisites": [
+        "os.process.basics"
+      ],
       "learningObjectives": [
-        { "description": "Define and calculate turnaround time, waiting time, and CPU utilization", "bloomLevel": "apply" },
-        { "description": "Compare FCFS, SJF, Round Robin, and priority scheduling", "bloomLevel": "analyze" }
+        {
+          "description": "Define and calculate turnaround time, waiting time, and CPU utilization",
+          "bloomLevel": "apply"
+        },
+        {
+          "description": "Compare FCFS, SJF, Round Robin, and priority scheduling",
+          "bloomLevel": "analyze"
+        }
       ],
       "resources": [
         {
@@ -718,20 +1072,37 @@
         }
       ],
       "assessments": {
-        "quiz": ["sched-q1", "sched-q2"],
-        "explanation": ["sched-e1"],
-        "applied": ["sched-a1"],
-        "coding": ["sched-c1"]
+        "quiz": [
+          "sched-q1",
+          "sched-q2"
+        ],
+        "explanation": [
+          "sched-e1"
+        ],
+        "applied": [
+          "sched-a1"
+        ],
+        "coding": [
+          "sched-c1"
+        ]
       }
     },
     {
       "id": "os.thread.basics",
       "title": "Threads vs. Processes",
       "domain": "os",
-      "prerequisites": ["os.process.basics"],
+      "prerequisites": [
+        "os.process.basics"
+      ],
       "learningObjectives": [
-        { "description": "Explain what threads share and what they don't within a process", "bloomLevel": "understand" },
-        { "description": "Distinguish user-level threads from kernel threads", "bloomLevel": "analyze" }
+        {
+          "description": "Explain what threads share and what they don't within a process",
+          "bloomLevel": "understand"
+        },
+        {
+          "description": "Distinguish user-level threads from kernel threads",
+          "bloomLevel": "analyze"
+        }
       ],
       "resources": [
         {
@@ -750,21 +1121,41 @@
         }
       ],
       "assessments": {
-        "quiz": ["thread-q1", "thread-q2"],
-        "explanation": ["thread-e1"],
-        "applied": ["thread-a1"],
-        "coding": ["thread-c1"]
+        "quiz": [
+          "thread-q1",
+          "thread-q2"
+        ],
+        "explanation": [
+          "thread-e1"
+        ],
+        "applied": [
+          "thread-a1"
+        ],
+        "coding": [
+          "thread-c1"
+        ]
       }
     },
     {
       "id": "os.sync.mutex",
       "title": "Mutexes & Semaphores",
       "domain": "os",
-      "prerequisites": ["os.thread.basics"],
+      "prerequisites": [
+        "os.thread.basics"
+      ],
       "learningObjectives": [
-        { "description": "Define race condition, critical section, and mutual exclusion", "bloomLevel": "understand" },
-        { "description": "Use a mutex and a semaphore correctly in pseudocode", "bloomLevel": "apply" },
-        { "description": "Explain why naive locking can cause priority inversion", "bloomLevel": "analyze" }
+        {
+          "description": "Define race condition, critical section, and mutual exclusion",
+          "bloomLevel": "understand"
+        },
+        {
+          "description": "Use a mutex and a semaphore correctly in pseudocode",
+          "bloomLevel": "apply"
+        },
+        {
+          "description": "Explain why naive locking can cause priority inversion",
+          "bloomLevel": "analyze"
+        }
       ],
       "resources": [
         {
@@ -788,21 +1179,41 @@
         }
       ],
       "assessments": {
-        "quiz": ["mutex-q1", "mutex-q2"],
-        "explanation": ["mutex-e1"],
-        "applied": ["mutex-a1"],
-        "coding": ["mutex-c1"]
+        "quiz": [
+          "mutex-q1",
+          "mutex-q2"
+        ],
+        "explanation": [
+          "mutex-e1"
+        ],
+        "applied": [
+          "mutex-a1"
+        ],
+        "coding": [
+          "mutex-c1"
+        ]
       }
     },
     {
       "id": "os.sync.deadlock",
       "title": "Deadlocks",
       "domain": "os",
-      "prerequisites": ["os.sync.mutex"],
+      "prerequisites": [
+        "os.sync.mutex"
+      ],
       "learningObjectives": [
-        { "description": "State the four Coffman conditions for deadlock", "bloomLevel": "remember" },
-        { "description": "Use a resource-allocation graph to detect deadlock", "bloomLevel": "apply" },
-        { "description": "Compare prevention, avoidance, detection, and recovery strategies", "bloomLevel": "evaluate" }
+        {
+          "description": "State the four Coffman conditions for deadlock",
+          "bloomLevel": "remember"
+        },
+        {
+          "description": "Use a resource-allocation graph to detect deadlock",
+          "bloomLevel": "apply"
+        },
+        {
+          "description": "Compare prevention, avoidance, detection, and recovery strategies",
+          "bloomLevel": "evaluate"
+        }
       ],
       "resources": [
         {
@@ -821,20 +1232,37 @@
         }
       ],
       "assessments": {
-        "quiz": ["deadlock-q1", "deadlock-q2"],
-        "explanation": ["deadlock-e1"],
-        "applied": ["deadlock-a1"],
-        "coding": ["deadlock-c1"]
+        "quiz": [
+          "deadlock-q1",
+          "deadlock-q2"
+        ],
+        "explanation": [
+          "deadlock-e1"
+        ],
+        "applied": [
+          "deadlock-a1"
+        ],
+        "coding": [
+          "deadlock-c1"
+        ]
       }
     },
     {
       "id": "os.memory.virtual",
       "title": "Virtual Memory",
       "domain": "os",
-      "prerequisites": ["os.process.basics"],
+      "prerequisites": [
+        "os.process.basics"
+      ],
       "learningObjectives": [
-        { "description": "Explain the purpose of virtual memory and address translation", "bloomLevel": "understand" },
-        { "description": "Describe how demand paging defers loading until needed", "bloomLevel": "understand" }
+        {
+          "description": "Explain the purpose of virtual memory and address translation",
+          "bloomLevel": "understand"
+        },
+        {
+          "description": "Describe how demand paging defers loading until needed",
+          "bloomLevel": "understand"
+        }
       ],
       "resources": [
         {
@@ -853,21 +1281,41 @@
         }
       ],
       "assessments": {
-        "quiz": ["vm-q1", "vm-q2"],
-        "explanation": ["vm-e1"],
-        "applied": ["vm-a1"],
-        "coding": ["vm-c1"]
+        "quiz": [
+          "vm-q1",
+          "vm-q2"
+        ],
+        "explanation": [
+          "vm-e1"
+        ],
+        "applied": [
+          "vm-a1"
+        ],
+        "coding": [
+          "vm-c1"
+        ]
       }
     },
     {
       "id": "os.memory.paging",
       "title": "Paging & Page Tables",
       "domain": "os",
-      "prerequisites": ["os.memory.virtual"],
+      "prerequisites": [
+        "os.memory.virtual"
+      ],
       "learningObjectives": [
-        { "description": "Explain how paging divides virtual and physical memory into fixed-size pages/frames", "bloomLevel": "understand" },
-        { "description": "Trace a virtual-to-physical address translation through a page table", "bloomLevel": "apply" },
-        { "description": "Describe the page fault handling sequence", "bloomLevel": "understand" }
+        {
+          "description": "Explain how paging divides virtual and physical memory into fixed-size pages/frames",
+          "bloomLevel": "understand"
+        },
+        {
+          "description": "Trace a virtual-to-physical address translation through a page table",
+          "bloomLevel": "apply"
+        },
+        {
+          "description": "Describe the page fault handling sequence",
+          "bloomLevel": "understand"
+        }
       ],
       "resources": [
         {
@@ -891,20 +1339,37 @@
         }
       ],
       "assessments": {
-        "quiz": ["paging-q1", "paging-q2"],
-        "explanation": ["paging-e1"],
-        "applied": ["paging-a1"],
-        "coding": ["paging-c1"]
+        "quiz": [
+          "paging-q1",
+          "paging-q2"
+        ],
+        "explanation": [
+          "paging-e1"
+        ],
+        "applied": [
+          "paging-a1"
+        ],
+        "coding": [
+          "paging-c1"
+        ]
       }
     },
     {
       "id": "os.memory.segmentation",
       "title": "Segmentation",
       "domain": "os",
-      "prerequisites": ["os.memory.virtual"],
+      "prerequisites": [
+        "os.memory.virtual"
+      ],
       "learningObjectives": [
-        { "description": "Contrast segmentation with paging", "bloomLevel": "analyze" },
-        { "description": "Explain external fragmentation and how it arises", "bloomLevel": "understand" }
+        {
+          "description": "Contrast segmentation with paging",
+          "bloomLevel": "analyze"
+        },
+        {
+          "description": "Explain external fragmentation and how it arises",
+          "bloomLevel": "understand"
+        }
       ],
       "resources": [
         {
@@ -923,20 +1388,37 @@
         }
       ],
       "assessments": {
-        "quiz": ["seg-q1", "seg-q2"],
-        "explanation": ["seg-e1"],
-        "applied": ["seg-a1"],
-        "coding": ["seg-c1"]
+        "quiz": [
+          "seg-q1",
+          "seg-q2"
+        ],
+        "explanation": [
+          "seg-e1"
+        ],
+        "applied": [
+          "seg-a1"
+        ],
+        "coding": [
+          "seg-c1"
+        ]
       }
     },
     {
       "id": "os.memory.tlb",
       "title": "TLB & Cache Hierarchy",
       "domain": "os",
-      "prerequisites": ["os.memory.paging"],
+      "prerequisites": [
+        "os.memory.paging"
+      ],
       "learningObjectives": [
-        { "description": "Explain why address translation without a TLB is too slow", "bloomLevel": "understand" },
-        { "description": "Describe TLB hit/miss handling and TLB shootdown", "bloomLevel": "understand" }
+        {
+          "description": "Explain why address translation without a TLB is too slow",
+          "bloomLevel": "understand"
+        },
+        {
+          "description": "Describe TLB hit/miss handling and TLB shootdown",
+          "bloomLevel": "understand"
+        }
       ],
       "resources": [
         {
@@ -955,20 +1437,37 @@
         }
       ],
       "assessments": {
-        "quiz": ["tlb-q1", "tlb-q2"],
-        "explanation": ["tlb-e1"],
-        "applied": ["tlb-a1"],
-        "coding": ["tlb-c1"]
+        "quiz": [
+          "tlb-q1",
+          "tlb-q2"
+        ],
+        "explanation": [
+          "tlb-e1"
+        ],
+        "applied": [
+          "tlb-a1"
+        ],
+        "coding": [
+          "tlb-c1"
+        ]
       }
     },
     {
       "id": "os.storage.filesystem",
       "title": "File Systems",
       "domain": "os",
-      "prerequisites": ["os.process.basics"],
+      "prerequisites": [
+        "os.process.basics"
+      ],
       "learningObjectives": [
-        { "description": "Describe the structure of a typical Unix file system", "bloomLevel": "understand" },
-        { "description": "Explain the difference between a file's data and its metadata", "bloomLevel": "understand" }
+        {
+          "description": "Describe the structure of a typical Unix file system",
+          "bloomLevel": "understand"
+        },
+        {
+          "description": "Explain the difference between a file's data and its metadata",
+          "bloomLevel": "understand"
+        }
       ],
       "resources": [
         {
@@ -987,20 +1486,37 @@
         }
       ],
       "assessments": {
-        "quiz": ["fs-q1", "fs-q2"],
-        "explanation": ["fs-e1"],
-        "applied": ["fs-a1"],
-        "coding": ["fs-c1"]
+        "quiz": [
+          "fs-q1",
+          "fs-q2"
+        ],
+        "explanation": [
+          "fs-e1"
+        ],
+        "applied": [
+          "fs-a1"
+        ],
+        "coding": [
+          "fs-c1"
+        ]
       }
     },
     {
       "id": "os.storage.inode",
       "title": "Inodes & Directory Structure",
       "domain": "os",
-      "prerequisites": ["os.storage.filesystem"],
+      "prerequisites": [
+        "os.storage.filesystem"
+      ],
       "learningObjectives": [
-        { "description": "List the fields stored in a Unix inode", "bloomLevel": "remember" },
-        { "description": "Trace how the OS resolves a path like /usr/bin/ls to disk blocks", "bloomLevel": "apply" }
+        {
+          "description": "List the fields stored in a Unix inode",
+          "bloomLevel": "remember"
+        },
+        {
+          "description": "Trace how the OS resolves a path like /usr/bin/ls to disk blocks",
+          "bloomLevel": "apply"
+        }
       ],
       "resources": [
         {
@@ -1019,20 +1535,37 @@
         }
       ],
       "assessments": {
-        "quiz": ["inode-q1", "inode-q2"],
-        "explanation": ["inode-e1"],
-        "applied": ["inode-a1"],
-        "coding": ["inode-c1"]
+        "quiz": [
+          "inode-q1",
+          "inode-q2"
+        ],
+        "explanation": [
+          "inode-e1"
+        ],
+        "applied": [
+          "inode-a1"
+        ],
+        "coding": [
+          "inode-c1"
+        ]
       }
     },
     {
       "id": "os.io.basics",
       "title": "I/O Subsystem",
       "domain": "os",
-      "prerequisites": ["os.process.basics"],
+      "prerequisites": [
+        "os.process.basics"
+      ],
       "learningObjectives": [
-        { "description": "Explain polling vs. interrupt-driven I/O", "bloomLevel": "understand" },
-        { "description": "Describe how the OS uses device drivers to abstract hardware", "bloomLevel": "understand" }
+        {
+          "description": "Explain polling vs. interrupt-driven I/O",
+          "bloomLevel": "understand"
+        },
+        {
+          "description": "Describe how the OS uses device drivers to abstract hardware",
+          "bloomLevel": "understand"
+        }
       ],
       "resources": [
         {
@@ -1051,20 +1584,37 @@
         }
       ],
       "assessments": {
-        "quiz": ["io-q1", "io-q2"],
-        "explanation": ["io-e1"],
-        "applied": ["io-a1"],
-        "coding": ["io-c1"]
+        "quiz": [
+          "io-q1",
+          "io-q2"
+        ],
+        "explanation": [
+          "io-e1"
+        ],
+        "applied": [
+          "io-a1"
+        ],
+        "coding": [
+          "io-c1"
+        ]
       }
     },
     {
       "id": "os.io.dma",
       "title": "DMA & Interrupts",
       "domain": "os",
-      "prerequisites": ["os.io.basics"],
+      "prerequisites": [
+        "os.io.basics"
+      ],
       "learningObjectives": [
-        { "description": "Trace a DMA disk read operation step by step", "bloomLevel": "apply" },
-        { "description": "Explain interrupt priority and masking", "bloomLevel": "understand" }
+        {
+          "description": "Trace a DMA disk read operation step by step",
+          "bloomLevel": "apply"
+        },
+        {
+          "description": "Explain interrupt priority and masking",
+          "bloomLevel": "understand"
+        }
       ],
       "resources": [
         {
@@ -1083,20 +1633,37 @@
         }
       ],
       "assessments": {
-        "quiz": ["dma-q1", "dma-q2"],
-        "explanation": ["dma-e1"],
-        "applied": ["dma-a1"],
-        "coding": ["dma-c1"]
+        "quiz": [
+          "dma-q1",
+          "dma-q2"
+        ],
+        "explanation": [
+          "dma-e1"
+        ],
+        "applied": [
+          "dma-a1"
+        ],
+        "coding": [
+          "dma-c1"
+        ]
       }
     },
     {
       "id": "os.security.protection",
       "title": "Protection Rings & Privilege Levels",
       "domain": "os",
-      "prerequisites": ["os.process.basics"],
+      "prerequisites": [
+        "os.process.basics"
+      ],
       "learningObjectives": [
-        { "description": "Explain user mode vs. kernel mode and why the distinction exists", "bloomLevel": "understand" },
-        { "description": "Describe how system calls cross the user/kernel boundary", "bloomLevel": "understand" }
+        {
+          "description": "Explain user mode vs. kernel mode and why the distinction exists",
+          "bloomLevel": "understand"
+        },
+        {
+          "description": "Describe how system calls cross the user/kernel boundary",
+          "bloomLevel": "understand"
+        }
       ],
       "resources": [
         {
@@ -1120,20 +1687,38 @@
         }
       ],
       "assessments": {
-        "quiz": ["rings-q1", "rings-q2"],
-        "explanation": ["rings-e1"],
-        "applied": ["rings-a1"],
-        "coding": ["rings-c1"]
+        "quiz": [
+          "rings-q1",
+          "rings-q2"
+        ],
+        "explanation": [
+          "rings-e1"
+        ],
+        "applied": [
+          "rings-a1"
+        ],
+        "coding": [
+          "rings-c1"
+        ]
       }
     },
     {
       "id": "os.boot.sequence",
       "title": "Boot Sequence & BIOS/UEFI",
       "domain": "os",
-      "prerequisites": ["os.process.basics", "os.storage.filesystem"],
+      "prerequisites": [
+        "os.process.basics",
+        "os.storage.filesystem"
+      ],
       "learningObjectives": [
-        { "description": "Describe the steps from power-on to user login", "bloomLevel": "understand" },
-        { "description": "Distinguish BIOS from UEFI", "bloomLevel": "remember" }
+        {
+          "description": "Describe the steps from power-on to user login",
+          "bloomLevel": "understand"
+        },
+        {
+          "description": "Distinguish BIOS from UEFI",
+          "bloomLevel": "remember"
+        }
       ],
       "resources": [
         {
@@ -1152,10 +1737,672 @@
         }
       ],
       "assessments": {
-        "quiz": ["boot-q1", "boot-q2"],
-        "explanation": ["boot-e1"],
-        "applied": ["boot-a1"],
-        "coding": ["boot-c1"]
+        "quiz": [
+          "boot-q1",
+          "boot-q2"
+        ],
+        "explanation": [
+          "boot-e1"
+        ],
+        "applied": [
+          "boot-a1"
+        ],
+        "coding": [
+          "boot-c1"
+        ]
+      }
+    },
+    {
+      "id": "dbms.relational.basics",
+      "title": "Relational Data Model & SQL Fundamentals",
+      "domain": "dbms",
+      "prerequisites": [],
+      "learningObjectives": [
+        {
+          "description": "Understand tables, primary keys, foreign keys, and integrity constraints",
+          "bloomLevel": "understand"
+        },
+        {
+          "description": "Write complex SQL queries involving INNER, LEFT, and FULL OUTER joins",
+          "bloomLevel": "apply"
+        },
+        {
+          "description": "Differentiate between WHERE and HAVING clauses in aggregation",
+          "bloomLevel": "analyze"
+        }
+      ],
+      "resources": [
+        {
+          "title": "CMU Database Group - Relational Model",
+          "url": "https://15445.courses.cs.cmu.edu/",
+          "type": "article",
+          "license": "CC-BY",
+          "estimatedMinutes": 15
+        }
+      ],
+      "microLessons": [
+        {
+          "id": "dbms.relational.basics-1",
+          "content": "### Relational Database Fundamentals\n\nA **relation** is a two-dimensional table composed of **tuples** (rows) and **attributes** (columns).\n\nKey constraints:\n1. **Primary Key**: Unique identifier for each tuple; never null.\n2. **Foreign Key**: Enforces referential integrity between child and parent tables.\n3. **Unique & Check Constraints**: Prevent data anomalies at the storage boundary.",
+          "estimatedSeconds": 70
+        },
+        {
+          "id": "dbms.relational.basics-2",
+          "content": "### SQL Joins Mastery\n\n- `INNER JOIN`: Returns records with matching values in both tables.\n- `LEFT JOIN`: Returns all records from the left table, plus matched records from the right table (NULL if no match).\n- `FULL OUTER JOIN`: Combines both tables, filling missing fields with NULL.\n\n*Interview Gotcha*: `WHERE` filters rows *before* grouping, while `HAVING` filters aggregated buckets *after* `GROUP BY`.",
+          "estimatedSeconds": 75
+        }
+      ],
+      "assessments": {
+        "quiz": [
+          "dbms-sql-q1"
+        ],
+        "explanation": [
+          "dbms-sql-e1"
+        ],
+        "applied": [],
+        "coding": []
+      }
+    },
+    {
+      "id": "dbms.normalization",
+      "title": "Database Normalization (1NF to BCNF)",
+      "domain": "dbms",
+      "prerequisites": [
+        "dbms.relational.basics"
+      ],
+      "learningObjectives": [
+        {
+          "description": "Identify insertion, deletion, and update anomalies in unnormalized schemas",
+          "bloomLevel": "understand"
+        },
+        {
+          "description": "Decompose schemas into 1NF, 2NF, 3NF, and BCNF",
+          "bloomLevel": "apply"
+        },
+        {
+          "description": "Analyze functional dependencies and test lossless join decomposition",
+          "bloomLevel": "evaluate"
+        }
+      ],
+      "resources": [
+        {
+          "title": "Database Normalization Guide",
+          "url": "https://en.wikipedia.org/wiki/Database_normalization",
+          "type": "article",
+          "license": "CC-BY-SA",
+          "estimatedMinutes": 12
+        }
+      ],
+      "microLessons": [
+        {
+          "id": "dbms.normalization-1",
+          "content": "### Why Normalize?\n\nNormalization eliminates **redundancy** and avoids three major anomalies:\n- **Insertion Anomaly**: Cannot add entity data without creating fictitious foreign records.\n- **Deletion Anomaly**: Deleting one piece of info inadvertently deletes unrelated entity data.\n- **Update Anomaly**: Updating a value in one row leaves contradictory stale values in duplicate rows.",
+          "estimatedSeconds": 70
+        },
+        {
+          "id": "dbms.normalization-2",
+          "content": "### 1NF, 2NF, 3NF, and BCNF\n\n- **1NF**: Atomic attribute values; no repeating groups.\n- **2NF**: In 1NF + No partial dependencies (every non-prime attribute depends on the *whole* candidate key).\n- **3NF**: In 2NF + No transitive dependencies (no non-prime attribute determines another non-prime).\n- **BCNF**: For every functional dependency $X \\to Y$, $X$ must be a superkey. BCNF strictly eliminates all FD-based anomalies.",
+          "estimatedSeconds": 85
+        }
+      ],
+      "assessments": {
+        "quiz": [
+          "dbms-norm-q1"
+        ],
+        "explanation": [
+          "dbms-norm-e1"
+        ],
+        "applied": [],
+        "coding": []
+      }
+    },
+    {
+      "id": "dbms.transactions.acid",
+      "title": "ACID Properties & Concurrency Control",
+      "domain": "dbms",
+      "prerequisites": [
+        "dbms.relational.basics"
+      ],
+      "learningObjectives": [
+        {
+          "description": "Define Atomicity, Consistency, Isolation, and Durability",
+          "bloomLevel": "remember"
+        },
+        {
+          "description": "Analyze the 4 SQL isolation levels and their concurrency trade-offs",
+          "bloomLevel": "analyze"
+        },
+        {
+          "description": "Explain 2-Phase Locking (2PL) and Deadlock resolution in DBMS",
+          "bloomLevel": "evaluate"
+        }
+      ],
+      "resources": [
+        {
+          "title": "ACID & Concurrency - Stanford CS145",
+          "url": "https://cs.stanford.edu/",
+          "type": "docs",
+          "license": "Academic",
+          "estimatedMinutes": 20
+        }
+      ],
+      "microLessons": [
+        {
+          "id": "dbms.transactions.acid-1",
+          "content": "### ACID Defined\n\n- **Atomicity**: All-or-nothing execution via write-ahead logging (WAL).\n- **Consistency**: The database moves only from one valid state to another valid state.\n- **Isolation**: Concurrent transactions appear as if executed sequentially.\n- **Durability**: Committed data persists even across hardware crashes.",
+          "estimatedSeconds": 70
+        },
+        {
+          "id": "dbms.transactions.acid-2",
+          "content": "### Isolation Levels & Anomalies\n\n1. **Read Uncommitted**: Suffers from Dirty Reads.\n2. **Read Committed**: Prevents Dirty Reads; allows Non-Repeatable Reads.\n3. **Repeatable Read**: Prevents Non-Repeatable Reads; may allow Phantom Reads.\n4. **Serializable**: Full isolation; no anomalies; highest lock contention overhead.",
+          "estimatedSeconds": 80
+        }
+      ],
+      "assessments": {
+        "quiz": [
+          "dbms-acid-q1"
+        ],
+        "explanation": [
+          "dbms-acid-e1"
+        ],
+        "applied": [],
+        "coding": []
+      }
+    },
+    {
+      "id": "dbms.indexing.btrees",
+      "title": "Indexing, B+ Trees & Query Optimization",
+      "domain": "dbms",
+      "prerequisites": [
+        "dbms.relational.basics"
+      ],
+      "learningObjectives": [
+        {
+          "description": "Contrast clustered vs non-clustered indexes",
+          "bloomLevel": "understand"
+        },
+        {
+          "description": "Explain why B+ Trees are preferred over binary search trees for disk storage",
+          "bloomLevel": "analyze"
+        }
+      ],
+      "resources": [
+        {
+          "title": "B+ Tree Indexing in Modern DBs",
+          "url": "https://use-the-index-luke.com/",
+          "type": "article",
+          "license": "Open",
+          "estimatedMinutes": 15
+        }
+      ],
+      "microLessons": [
+        {
+          "id": "dbms.indexing.btrees-1",
+          "content": "### Why B+ Trees in Databases?\n\nDisks read data in multi-kilobyte pages. B+ Trees have a high fan-out (order $M \\ge 100$), reducing tree height to 3–4 levels even for millions of records.\n\n- All data pointers sit in leaf nodes linked horizontally as a doubly linked list, enabling fast range scans (`BETWEEN` queries).\n- Internal nodes store only search keys, maximizing memory cache density.",
+          "estimatedSeconds": 75
+        }
+      ],
+      "assessments": {
+        "quiz": [],
+        "explanation": [],
+        "applied": [],
+        "coding": []
+      }
+    },
+    {
+      "id": "networks.osi.tcpip",
+      "title": "OSI 7-Layer vs TCP/IP Architecture",
+      "domain": "networks",
+      "prerequisites": [],
+      "learningObjectives": [
+        {
+          "description": "Map networking protocols to their respective OSI and TCP/IP layers",
+          "bloomLevel": "understand"
+        },
+        {
+          "description": "Trace packet encapsulation and decapsulation across network boundaries",
+          "bloomLevel": "analyze"
+        }
+      ],
+      "resources": [
+        {
+          "title": "Computer Networking: A Top-Down Approach",
+          "url": "https://kurose.cs.umass.edu/",
+          "type": "article",
+          "license": "CC-BY",
+          "estimatedMinutes": 18
+        }
+      ],
+      "microLessons": [
+        {
+          "id": "networks.osi.tcpip-1",
+          "content": "### OSI 7-Layer Stack\n\n1. **Physical**: Bits over wire/fiber.\n2. **Data Link**: Frames, MAC addresses, Ethernet, switches.\n3. **Network**: Packets, IP addresses, routing (OSPF, BGP).\n4. **Transport**: Segments, TCP/UDP, port multiplexing.\n5. **Session**: Session control and RPC channels.\n6. **Presentation**: Encoding, encryption (TLS), compression.\n7. **Application**: HTTP, DNS, SMTP, SSH.",
+          "estimatedSeconds": 75
+        }
+      ],
+      "assessments": {
+        "quiz": [],
+        "explanation": [],
+        "applied": [],
+        "coding": []
+      }
+    },
+    {
+      "id": "networks.transport.tcp-udp",
+      "title": "TCP 3-Way Handshake & UDP",
+      "domain": "networks",
+      "prerequisites": [
+        "networks.osi.tcpip"
+      ],
+      "learningObjectives": [
+        {
+          "description": "Describe SYN, SYN-ACK, and ACK sequence exchanges",
+          "bloomLevel": "understand"
+        },
+        {
+          "description": "Differentiate reliable ordered TCP stream from lightweight UDP datagrams",
+          "bloomLevel": "evaluate"
+        }
+      ],
+      "resources": [
+        {
+          "title": "RFC 793 - Transmission Control Protocol",
+          "url": "https://www.ietf.org/rfc/rfc793.txt",
+          "type": "docs",
+          "license": "IETF Open",
+          "estimatedMinutes": 15
+        }
+      ],
+      "microLessons": [
+        {
+          "id": "networks.transport.tcp-udp-1",
+          "content": "### TCP 3-Way Handshake\n\nTo establish full-duplex communication:\n1. **Client $\\to$ Server**: `SYN(seq=x)`\n2. **Server $\\to$ Client**: `SYN(seq=y) + ACK(x+1)`\n3. **Client $\\to$ Server**: `ACK(y+1)`\n\nWhy not 2-way? Without the third ACK, the server cannot verify if the client received its sequence number $y$, risking ghost connections from delayed packets.",
+          "estimatedSeconds": 75
+        }
+      ],
+      "assessments": {
+        "quiz": [],
+        "explanation": [],
+        "applied": [],
+        "coding": []
+      }
+    },
+    {
+      "id": "networks.ip.addressing",
+      "title": "IP Addressing, CIDR & Routing",
+      "domain": "networks",
+      "prerequisites": [
+        "networks.osi.tcpip"
+      ],
+      "learningObjectives": [
+        {
+          "description": "Calculate network address, broadcast address, and subnet masks using CIDR",
+          "bloomLevel": "apply"
+        }
+      ],
+      "resources": [
+        {
+          "title": "Subnetting & CIDR Tutorial",
+          "url": "https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing",
+          "type": "article",
+          "license": "CC-BY",
+          "estimatedMinutes": 12
+        }
+      ],
+      "microLessons": [
+        {
+          "id": "networks.ip.addressing-1",
+          "content": "### Subnetting with CIDR\n\nClassless Inter-Domain Routing (CIDR) uses slash notation (e.g., `/24`).\n- A `/24` subnet has 24 network bits and $32 - 24 = 8$ host bits ($2^8 = 256$ total addresses, 254 usable hosts).\n- Reserve 2 addresses: All 0s in host portion = Network ID; All 1s = Broadcast Address.",
+          "estimatedSeconds": 70
+        }
+      ],
+      "assessments": {
+        "quiz": [],
+        "explanation": [],
+        "applied": [],
+        "coding": []
+      }
+    },
+    {
+      "id": "networks.app.http-dns",
+      "title": "DNS Resolution, HTTP/2 & HTTPS/TLS",
+      "domain": "networks",
+      "prerequisites": [
+        "networks.transport.tcp-udp"
+      ],
+      "learningObjectives": [
+        {
+          "description": "Trace the step-by-step DNS resolution workflow from browser cache to root server",
+          "bloomLevel": "understand"
+        },
+        {
+          "description": "Explain TLS handshake and multiplexing advantages in HTTP/2 and HTTP/3",
+          "bloomLevel": "analyze"
+        }
+      ],
+      "resources": [
+        {
+          "title": "High Performance Browser Networking",
+          "url": "https://hpbn.co/",
+          "type": "article",
+          "license": "Open",
+          "estimatedMinutes": 15
+        }
+      ],
+      "microLessons": [
+        {
+          "id": "networks.app.http-dns-1",
+          "content": "### What Happens When You Type google.com?\n\n1. **DNS Lookup**: Browser Cache $\\to$ OS Cache $\\to$ Local DNS Resolver $\\to$ Root Server $\\to$ TLD Server (`.com`) $\\to$ Authoritative Name Server $\\to$ Returns IP.\n2. **TCP Handshake**: 3-way handshake over Port 443.\n3. **TLS Handshake**: Certificate exchange, asymmetric key agreement, symmetric session key generated.\n4. **HTTP GET**: Browser requests resource, server replies with payload.",
+          "estimatedSeconds": 80
+        }
+      ],
+      "assessments": {
+        "quiz": [],
+        "explanation": [],
+        "applied": [],
+        "coding": []
+      }
+    },
+    {
+      "id": "oop.pillars.basics",
+      "title": "The 4 Pillars of OOP & Design Basics",
+      "domain": "oop-design",
+      "prerequisites": [],
+      "learningObjectives": [
+        {
+          "description": "Explain Encapsulation, Abstraction, Inheritance, and Polymorphism",
+          "bloomLevel": "understand"
+        },
+        {
+          "description": "Differentiate compile-time (overloading) vs runtime (overriding/vtable) polymorphism",
+          "bloomLevel": "analyze"
+        }
+      ],
+      "resources": [
+        {
+          "title": "OOP Core Fundamentals",
+          "url": "https://developer.mozilla.org/",
+          "type": "docs",
+          "license": "CC-BY-SA",
+          "estimatedMinutes": 14
+        }
+      ],
+      "microLessons": [
+        {
+          "id": "oop.pillars.basics-1",
+          "content": "### The Four Pillars of OOP\n\n1. **Encapsulation**: Bundling state and methods within a class, hiding internal representation with private fields.\n2. **Abstraction**: Exposing clean interfaces while hiding complex implementation details.\n3. **Inheritance**: Code reusability where derived classes extend base class functionality.\n4. **Polymorphism**: Ability of entities to take multiple forms (static via overloading, dynamic via virtual method dispatch / overriding).",
+          "estimatedSeconds": 75
+        }
+      ],
+      "assessments": {
+        "quiz": [],
+        "explanation": [],
+        "applied": [],
+        "coding": []
+      }
+    },
+    {
+      "id": "oop.solid.principles",
+      "title": "SOLID Design Principles",
+      "domain": "oop-design",
+      "prerequisites": [
+        "oop.pillars.basics"
+      ],
+      "learningObjectives": [
+        {
+          "description": "Define Single Responsibility, Open/Closed, Liskov Substitution, Interface Segregation, and Dependency Inversion",
+          "bloomLevel": "understand"
+        },
+        {
+          "description": "Identify violations of SOLID in legacy codebases and refactor cleanly",
+          "bloomLevel": "apply"
+        }
+      ],
+      "resources": [
+        {
+          "title": "Clean Code - SOLID Principles",
+          "url": "https://en.wikipedia.org/wiki/SOLID",
+          "type": "article",
+          "license": "CC-BY",
+          "estimatedMinutes": 15
+        }
+      ],
+      "microLessons": [
+        {
+          "id": "oop.solid.principles-1",
+          "content": "### SOLID in a Nutshell\n\n- **S (Single Responsibility)**: A class should have one, and only one, reason to change.\n- **O (Open/Closed)**: Open for extension, closed for modification (use polymorphism/interfaces).\n- **L (Liskov Substitution)**: Subclasses must be substitutable for their superclasses without breaking correctness.\n- **I (Interface Segregation)**: Clients should not be forced to depend on interfaces they do not use.\n- **D (Dependency Inversion)**: Depend on abstractions, not concretions.",
+          "estimatedSeconds": 85
+        }
+      ],
+      "assessments": {
+        "quiz": [],
+        "explanation": [],
+        "applied": [],
+        "coding": []
+      }
+    },
+    {
+      "id": "oop.patterns.gang-of-four",
+      "title": "Essential Design Patterns (Creational, Structural, Behavioral)",
+      "domain": "oop-design",
+      "prerequisites": [
+        "oop.solid.principles"
+      ],
+      "learningObjectives": [
+        {
+          "description": "Implement Singleton, Factory, Observer, and Strategy patterns",
+          "bloomLevel": "apply"
+        },
+        {
+          "description": "Choose the appropriate pattern for decoupled, testable architectures",
+          "bloomLevel": "evaluate"
+        }
+      ],
+      "resources": [
+        {
+          "title": "Refactoring Guru - Design Patterns",
+          "url": "https://refactoring.guru/design-patterns",
+          "type": "docs",
+          "license": "Open",
+          "estimatedMinutes": 20
+        }
+      ],
+      "microLessons": [
+        {
+          "id": "oop.patterns.gang-of-four-1",
+          "content": "### 4 Must-Know Interview Patterns\n\n1. **Singleton**: Ensures only one instance exists with a global access point (watch out for thread-safety!).\n2. **Factory Method**: Delegates object instantiation to subclasses without specifying exact concrete classes.\n3. **Observer**: Defines a one-to-many subscription dependency (event emitters, state stores).\n4. **Strategy**: Encapsulates interchangeable algorithms behind a common interface.",
+          "estimatedSeconds": 80
+        }
+      ],
+      "assessments": {
+        "quiz": [],
+        "explanation": [],
+        "applied": [],
+        "coding": []
+      }
+    },
+    {
+      "id": "oop.system.scalability",
+      "title": "Scalability Fundamentals & CAP Theorem",
+      "domain": "oop-design",
+      "prerequisites": [
+        "oop.patterns.gang-of-four"
+      ],
+      "learningObjectives": [
+        {
+          "description": "Contrast horizontal scaling vs vertical scaling and evaluate caching layers",
+          "bloomLevel": "understand"
+        },
+        {
+          "description": "Apply the CAP Theorem (Consistency, Availability, Partition Tolerance) to distributed databases",
+          "bloomLevel": "evaluate"
+        }
+      ],
+      "resources": [
+        {
+          "title": "System Design Primer",
+          "url": "https://github.com/donnemartin/system-design-primer",
+          "type": "docs",
+          "license": "CC-BY",
+          "estimatedMinutes": 25
+        }
+      ],
+      "microLessons": [
+        {
+          "id": "oop.system.scalability-1",
+          "content": "### System Design Building Blocks\n\n- **Load Balancing**: Distributes incoming traffic across healthy backend servers (Round Robin, Least Connections, Consistent Hashing).\n- **Caching (Redis/Memcached)**: Caches hot reads near the application tier (Cache-Aside, Write-Through, Write-Back).\n- **CAP Theorem**: In any distributed system over an unreliable network (Partition Tolerance), you can guarantee either **Consistency (CP)** OR **Availability (AP)**, never both simultaneously.",
+          "estimatedSeconds": 85
+        }
+      ],
+      "assessments": {
+        "quiz": [],
+        "explanation": [],
+        "applied": [],
+        "coding": []
+      }
+    },
+    {
+      "id": "apt.quant.foundations",
+      "title": "Quantitative Aptitude for Campus Placements",
+      "domain": "aptitude",
+      "prerequisites": [],
+      "learningObjectives": [
+        {
+          "description": "Solve Time-Work, Speed-Distance, and Probability problems within 60 seconds",
+          "bloomLevel": "apply"
+        }
+      ],
+      "resources": [
+        {
+          "title": "Quantitative Aptitude Short-cuts",
+          "url": "https://www.geeksforgeeks.org/quantitative-aptitude-questions/",
+          "type": "article",
+          "license": "Free",
+          "estimatedMinutes": 15
+        }
+      ],
+      "microLessons": [
+        {
+          "id": "apt.quant.foundations-1",
+          "content": "### Speed Math & Time-Work Shortcuts\n\n- **LCM Method for Work**: If A completes in $x$ days, B in $y$ days, total work = $\\text{LCM}(x, y)$. Daily efficiencies = $\\text{LCM}/x$ and $\\text{LCM}/y$.\n- **Relative Speed**: Two objects moving towards each other $\\implies$ speeds add ($S_1 + S_2$). Moving in same direction $\\implies$ speeds subtract ($|S_1 - S_2|$).",
+          "estimatedSeconds": 70
+        }
+      ],
+      "assessments": {
+        "quiz": [],
+        "explanation": [],
+        "applied": [],
+        "coding": []
+      }
+    },
+    {
+      "id": "apt.logical.reasoning",
+      "title": "Logical Reasoning & Syllogism Strategies",
+      "domain": "aptitude",
+      "prerequisites": [
+        "apt.quant.foundations"
+      ],
+      "learningObjectives": [
+        {
+          "description": "Deduce Venn-diagram syllogisms and decode family relation trees without error",
+          "bloomLevel": "apply"
+        }
+      ],
+      "resources": [
+        {
+          "title": "Logical Reasoning Placement Guide",
+          "url": "https://www.indiabix.com/logical-reasoning/questions-and-answers/",
+          "type": "article",
+          "license": "Free",
+          "estimatedMinutes": 15
+        }
+      ],
+      "microLessons": [
+        {
+          "id": "apt.logical.reasoning-1",
+          "content": "### Syllogism Venn Strategy\n\n- **All A are B**: Circle A is inside Circle B.\n- **Some A are B**: Circles A and B overlap.\n- **No A is B**: Circles A and B are strictly disjoint.\n\n*Rule*: A conclusion is true ONLY if it holds in EVERY possible valid Venn arrangement.",
+          "estimatedSeconds": 70
+        }
+      ],
+      "assessments": {
+        "quiz": [],
+        "explanation": [],
+        "applied": [],
+        "coding": []
+      }
+    },
+    {
+      "id": "hr.star.framework",
+      "title": "The STAR Technique for Behavioral Rounds",
+      "domain": "hr-behavioral",
+      "prerequisites": [],
+      "learningObjectives": [
+        {
+          "description": "Structure personal project experiences using Situation, Task, Action, and Result",
+          "bloomLevel": "apply"
+        },
+        {
+          "description": "Deliver compelling, quantifiable metrics in responses within 2 minutes",
+          "bloomLevel": "create"
+        }
+      ],
+      "resources": [
+        {
+          "title": "Mastering the STAR Interview Method",
+          "url": "https://hbr.org/",
+          "type": "article",
+          "license": "Open",
+          "estimatedMinutes": 15
+        }
+      ],
+      "microLessons": [
+        {
+          "id": "hr.star.framework-1",
+          "content": "### The STAR Blueprint\n\n- **S (Situation)**: 15-20s. What company/project, what context, what specific roadblock?\n- **T (Task)**: 10s. What was *your* direct responsibility?\n- **A (Action)**: 60s. The core meat: what technical decisions, tools, and actions did YOU take?\n- **R (Result)**: 20-30s. The impact: quantify latency saved, users served, or lessons learned.",
+          "estimatedSeconds": 75
+        }
+      ],
+      "assessments": {
+        "quiz": [],
+        "explanation": [],
+        "applied": [],
+        "coding": []
+      }
+    },
+    {
+      "id": "hr.situational.mastery",
+      "title": "Handling Conflict, Failure & Culture Fit",
+      "domain": "hr-behavioral",
+      "prerequisites": [
+        "hr.star.framework"
+      ],
+      "learningObjectives": [
+        {
+          "description": "Articulate constructive responses to technical disagreements and past failures",
+          "bloomLevel": "evaluate"
+        }
+      ],
+      "resources": [
+        {
+          "title": "Engineering Culture & Behavioral Questions",
+          "url": "https://github.com/viraptor/reverse-interview",
+          "type": "docs",
+          "license": "CC-BY",
+          "estimatedMinutes": 15
+        }
+      ],
+      "microLessons": [
+        {
+          "id": "hr.situational.mastery-1",
+          "content": "### Golden Rules for Tough HR Questions\n\n1. **Tell me about a failure**: Choose a real technical blunder from college or projects, focus 80% on *what you learned* and how you prevent it now.\n2. **Disagreement with teammate**: Never criticize personal traits. Focus on data-driven benchmarking and achieving team alignment.",
+          "estimatedSeconds": 75
+        }
+      ],
+      "assessments": {
+        "quiz": [],
+        "explanation": [],
+        "applied": [],
+        "coding": []
       }
     }
   ]
